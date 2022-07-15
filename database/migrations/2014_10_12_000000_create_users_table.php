@@ -19,8 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedBigInteger('scholarship_id')->unsigned()->default(1);
             $table->rememberToken();
             $table->timestamps();
+            $table->foreign('scholarship_id')->references('id')->on('scholarships');
         });
     }
 
