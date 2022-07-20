@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\RolController;
+use App\Http\Controllers\UsuarioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +31,10 @@ Route::resource('scholarships', App\Http\Controllers\ScholarshipController::clas
 
 
 Route::resource('profiles', App\Http\Controllers\ProfileController::class);
+
+// grupo de rutas protegidas para los controladores
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RolController::class);
+    Route::resource('usuarios', UsuarioController::class);
+    Route::resource('blogs', BlogController::class);
+});
