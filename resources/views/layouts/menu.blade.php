@@ -1,10 +1,12 @@
-@can('categories.index')
-<li class="nav-item">
-    <a href="{{ route('categories.index') }}"
-       class="nav-link {{ Request::is('categories*') ? 'active' : '' }}">
-        <p>Actividades</p>
+@can('users.index')
+<a class="nav-link" href="/usuarios">
+        <i class=" fas fa-users"></i><span>Usuarios</span>
     </a>
-</li>
+@endcan
+@can('roles.index')
+<a class="nav-link" href="/roles">
+    <i class=" fas fa-user-lock"></i><span>Roles</span>
+    </a>
 @endcan
 
 @can('scholarships.index')
@@ -16,17 +18,30 @@
 </li>
 @endcan
 
+@can('categories.index')
+<li class="nav-item">
+    <a href="{{ route('categories.index') }}"
+       class="nav-link {{ Request::is('categories*') ? 'active' : '' }}">
+        <p>Actividades</p>
+    </a>
+</li>
+@endcan
+
+
 <li class="nav-item">
     <a href="{{ route('profiles.index') }}"
        class="nav-link {{ Request::is('profiles*') ? 'active' : '' }}">
-        <p>Profiles</p>
+        <p>Perfil</p>
     </a>
 </li>
 
-<a class="nav-link" href="/usuarios">
-        <i class=" fas fa-users"></i><span>Usuarios</span>
+
+@can('workshops.index')
+<li class="nav-item">
+    <a href="{{ route('workshops.index') }}"
+       class="nav-link {{ Request::is('workshops*') ? 'active' : '' }}">
+        <p>Workshops</p>
     </a>
-    <a class="nav-link" href="/roles">
-        <i class=" fas fa-user-lock"></i><span>Roles</span>
-    </a>
+</li>
+@endcan
 

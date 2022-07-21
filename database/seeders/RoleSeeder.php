@@ -31,6 +31,14 @@ class RoleSeeder extends Seeder
         Permission :: create(['name'=>'categories.update'])->syncRoles([$admin,]);
         Permission :: create(['name'=>'categories.destroy'])->syncRoles([$admin,]);
 
+        Permission :: create(['name'=>'scholarships.index'])->syncRoles([$admin,]);
+        Permission :: create(['name'=>'scholarships.create'])->syncRoles([$admin,]);
+        Permission :: create(['name'=>'scholarships.store'])->syncRoles([$admin,]);
+        Permission :: create(['name'=>'scholarships.show'])->syncRoles([$admin,]);
+        Permission :: create(['name'=>'scholarships.edit'])->syncRoles([$admin,]);
+        Permission :: create(['name'=>'scholarships.update'])->syncRoles([$admin,]);
+        Permission :: create(['name'=>'scholarships.destroy'])->syncRoles([$admin,]);
+
         Permission :: create(['name'=>'roles.index'])->syncRoles([$admin,]);
         Permission :: create(['name'=>'roles.create'])->syncRoles([$admin,]);
         Permission :: create(['name'=>'roles.store'])->syncRoles([$admin,]);
@@ -46,6 +54,15 @@ class RoleSeeder extends Seeder
         Permission :: create(['name'=>'users.edit'])->syncRoles([$admin,]);
         Permission :: create(['name'=>'users.update'])->syncRoles([$admin,]);
         Permission :: create(['name'=>'users.destroy'])->syncRoles([$admin,]);
+
+        Permission :: create(['name'=>'workshops.index'])->syncRoles([$admin,$docente,$estudiante,]);
+        Permission :: create(['name'=>'workshops.create'])->syncRoles([$admin,$docente,]);
+        Permission :: create(['name'=>'workshops.store'])->syncRoles([$admin,$docente,]);
+        Permission :: create(['name'=>'workshops.show'])->syncRoles([$admin,$docente,]);
+        Permission :: create(['name'=>'workshops.edit'])->syncRoles([$admin,$docente,]);
+        Permission :: create(['name'=>'workshops.update'])->syncRoles([$admin,$docente,]);
+        Permission :: create(['name'=>'workshops.destroy'])->syncRoles([$admin,]);
+
 
 
                     

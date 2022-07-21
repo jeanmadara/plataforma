@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
         // Usuarios base
         $this->call(UserSeeder :: class);
 
-        // \App\Models\User::factory(10)->create();
+        // Categoria
+        $this->call(CategorieSeeder :: class);
+
+        
     }
 }

@@ -15,10 +15,10 @@ class RolController extends Controller
     function __construct()
     {
 
-        $this->middleware('can:categories.index')->only('index');
-        $this->middleware('can:categories.edit')->only('edit','update');
-        $this->middleware('can:categories.create')->only('create','store');
-        $this->middleware('can:categories.destroy')->only('destroy');
+        $this->middleware('can:roles.index')->only('index');
+        $this->middleware('can:roles.edit')->only('edit','update');
+        $this->middleware('can:roles.create')->only('create','store');
+        $this->middleware('can:roles.destroy')->only('destroy');
     }
     /**
      * Display a listing of the resource.

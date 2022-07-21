@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Perfil de Usuario</h1>
+                    <h1>Edit Workshop</h1>
                 </div>
             </div>
         </div>
@@ -17,19 +17,17 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'profiles.store']) !!}
+            {!! Form::model($workshop, ['route' => ['workshops.update', $workshop->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
-
                 <div class="row">
-                    @include('profiles.fields')
+                    @include('workshops.fields')
                 </div>
-
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('profiles.index') }}" class="btn btn-default">Cancelar</a>
+                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('workshops.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}
