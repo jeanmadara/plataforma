@@ -43,7 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function perfiles(){
-        return $this->hasMany('App\Models\Perfile');
+    public function profiles(){
+        return $this->hasMany('App\Models\Profile');
     }
+
+    public function workshops(){
+        return $this->belongsToMany('App\Models\Workshop','user_workshop','user_id','workshop_id')->withTimestamps();
+    } 
 }

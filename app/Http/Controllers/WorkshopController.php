@@ -11,6 +11,7 @@ use Flash;
 use Response;
 
 use App\Models\Categorie;
+use App\Models\Workshop;
 
 class WorkshopController extends AppBaseController
 {
@@ -37,7 +38,16 @@ class WorkshopController extends AppBaseController
     {
         $workshops = $this->workshopRepository->all();
 
-        return view('workshops.index')
+        $user = auth()->id();
+
+        $workshops_user = Workshop::
+        join('user_workshop', 'workshops.id', '=', 'user_workshop.workshop_id')
+        ->join('users', 'users.id', '=', 'user_workshop.user_id')
+        ->join('profiles', 'profiles.user_id', '=', 'users.id')
+        ->where('user_workshop.user_id',$user)
+        ->get();
+
+        return view('workshops.index',compact('workshops_user'))
             ->with('workshops', $workshops);
     }
 
@@ -62,8 +72,11 @@ class WorkshopController extends AppBaseController
     public function store(CreateWorkshopRequest $request)
     {
         $input = $request->all();
+        $user_id = auth()->id();
 
         $workshop = $this->workshopRepository->create($input);
+
+        $workshop->users()->attach($user_id); 
 
         Flash::success('Workshop saved successfully.');
 

@@ -7,24 +7,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class Workshop
+ * Class Session
  * @package App\Models
- * @version July 20, 2022, 3:42 am UTC
+ * @version July 22, 2022, 8:12 pm UTC
  *
  * @property string $name
- * @property string $description
  * @property string|\Carbon\Carbon $start
  * @property string|\Carbon\Carbon $end
- * @property number $price
- * @property integer $categorie_id
+ * @property integer $workshop_id
  */
-class Workshop extends Model
+class Session extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'workshops';
+    public $table = 'sessions';
     
 
     protected $dates = ['deleted_at'];
@@ -33,12 +31,9 @@ class Workshop extends Model
 
     public $fillable = [
         'name',
-        'teacher',
-        'description',
         'start',
         'end',
-        'price',
-        'categorie_id'
+        'workshop_id'
     ];
 
     /**
@@ -48,12 +43,9 @@ class Workshop extends Model
      */
     protected $casts = [
         'name' => 'string',
-        'teacher' => 'string',
-        'description' => 'string',
         'start' => 'datetime',
         'end' => 'datetime',
-        'price' => 'decimal:2',
-        'categorie_id' => 'integer'
+        'workshop_id' => 'integer'
     ];
 
     /**
@@ -63,16 +55,10 @@ class Workshop extends Model
      */
     public static $rules = [
         'name' => 'required',
-        'teacher' => 'required',
-        'description' => 'required',
         'start' => 'required',
-        'end' => 'required'
+        'end' => 'required',
+        'workshop_id' => 'required'
     ];
-
-    public function users(){
-        return $this->belongsToMany('App\Models\User','user_workshop','workshop_id','user_id')->withTimestamps();
-    } 
-    
 
     
 }

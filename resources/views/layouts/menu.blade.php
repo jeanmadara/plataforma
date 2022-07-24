@@ -45,3 +45,19 @@
 </li>
 @endcan
 
+<li class="nav-item">
+    <a href="{{ route('userWorkshops.index') }}"
+       class="nav-link {{ Request::is('userWorkshops*') ? 'active' : '' }}">
+        <p>User Workshops</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('sessions.index') }}"
+       class="nav-link {{ Request::is('sessions*') ? 'active' : '' }}">
+        <p>Sessions</p>
+    </a>
+</li>
+
+

@@ -1,23 +1,12 @@
 <!-- Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('name', 'Nombre de Workshop:') !!}
+    {!! Form::label('name', 'Name:') !!}
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- teacher Id Field -->
-<div class="form-group col-sm-6">
-    {{ Form::hidden('teacher', auth()->id()) }}
-</div>
-
-<!-- Description Field -->
-<div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('description', 'Breve Descripción:') !!}
-    {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Start Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('start', 'Fecha de inicio:') !!}
+    {!! Form::label('start', 'Start:') !!}
     {!! Form::text('start', null, ['class' => 'form-control','id'=>'start']) !!}
 </div>
 
@@ -33,7 +22,7 @@
 
 <!-- End Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('end', 'Fecha Fin:') !!}
+    {!! Form::label('end', 'End:') !!}
     {!! Form::text('end', null, ['class' => 'form-control','id'=>'end']) !!}
 </div>
 
@@ -47,14 +36,8 @@
     </script>
 @endpush
 
-<!-- Price Field -->
+<!-- Workshop Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('price', 'Precio:') !!}
-    {!! Form::number('price', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Categorie Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('categorie_id', 'Categoria:') !!}
-    {!! Form::select('categorie_id', $categories, null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::label('workshop_id', 'Workshop Id:') !!}
+    {!! Form::select('workshop_id', ], null, ['class' => 'form-control custom-select']) !!}
 </div>

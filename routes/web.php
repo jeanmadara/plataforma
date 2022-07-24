@@ -41,3 +41,9 @@ Route::group(['middleware' => ['auth']], function() {
 
 
 Route::resource('workshops', App\Http\Controllers\WorkshopController::class);
+
+
+Route::resource('userWorkshops', App\Http\Controllers\user_workshopController::class);
+
+
+Route::resource('sessions', App\Http\Controllers\SessionController::class);
