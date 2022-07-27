@@ -12,6 +12,7 @@ use Response;
 
 use App\Models\Categorie;
 use App\Models\Workshop;
+use App\Models\Profile;
 
 class WorkshopController extends AppBaseController
 {
@@ -47,8 +48,8 @@ class WorkshopController extends AppBaseController
         ->where('user_workshop.user_id',$user)
         ->get();
 
-        return view('workshops.index',compact('workshops_user'))
-            ->with('workshops', $workshops);
+        return view('workshops.index')
+            ->with('workshops_user', $workshops_user);
     }
 
     /**
@@ -59,7 +60,11 @@ class WorkshopController extends AppBaseController
     public function create()
     {
         $categories = Categorie::pluck('name','id');
-        return view('workshops.create',compact('categories'));
+        $user = auth()->id();
+
+        $teacher = Profile::where('user_id', $user)->get();
+
+        return view('workshops.create',compact('categories'),compact('teacher'));
     }
 
     /**
@@ -114,13 +119,19 @@ class WorkshopController extends AppBaseController
     {
         $workshop = $this->workshopRepository->find($id);
 
+        $categories = Categorie::pluck('name','id');
+
+        $user = auth()->id();
+
+        $teacher = Profile::where('user_id', $user)->get();
+
         if (empty($workshop)) {
             Flash::error('Workshop not found');
 
             return redirect(route('workshops.index'));
         }
 
-        return view('workshops.edit')->with('workshop', $workshop);
+        return view('workshops.edit',compact('categories'),compact('teacher'))->with('workshop', $workshop);
     }
 
     /**

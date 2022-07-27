@@ -13,7 +13,7 @@
             <tr>
                 <td>{{ $userWorkshop->state }}</td>
             <td>{{ $userWorkshop->user->name }}</td>
-            <td>{{ $userWorkshop->workshop->name }}</td>
+            <td>{{ $userWorkshop->workshop->name_workshop }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['userWorkshops.destroy', $userWorkshop->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

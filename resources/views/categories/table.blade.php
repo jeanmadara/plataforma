@@ -10,7 +10,7 @@
         <tbody>
         @foreach($categories as $categorie)
             <tr>
-                <td>{{ $categorie->name }}</td>
+                <td>{{ $categorie->name_categorie }}</td>
             <td>{{ $categorie->detail }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['categories.destroy', $categorie->id], 'method' => 'delete']) !!}

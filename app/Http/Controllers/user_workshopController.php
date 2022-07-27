@@ -11,6 +11,7 @@ use Flash;
 use Response;
 use App\Models\User;
 use App\Models\Workshop;
+use Illuminate\Support\Facades\DB;
 
 class user_workshopController extends AppBaseController
 {
@@ -33,7 +34,15 @@ class user_workshopController extends AppBaseController
     {
         $userWorkshops = $this->userWorkshopRepository->all();
 
-        return view('user_workshops.index')
+        $workshops_user = DB::table('workshops as w')
+        ->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
+        ->join('users as us', 'us.id', '=', 'uw.user_id')
+        ->join('profiles as p', 'p.user_id', '=', 'us.id')
+        ->join('categories as c', 'c.id', '=', 'w.categorie_id')
+        ->select( 'w.*', 'name_categorie', 'state')->distinct()->get();
+
+     
+        return view('user_workshops.index',compact('workshops_user'))
             ->with('userWorkshops', $userWorkshops);
     }
 
@@ -45,7 +54,7 @@ class user_workshopController extends AppBaseController
     public function create()
     {
         $users = User::pluck('name','id');
-        $workshops = Workshop::pluck('name','id');
+        $workshops = Workshop::pluck('name_workshop','id');
 
         return view('user_workshops.create',compact('users'),compact('workshops'));
     }

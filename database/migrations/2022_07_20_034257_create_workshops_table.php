@@ -16,9 +16,9 @@ class CreateWorkshopsTable extends Migration
     {
         Schema::create('workshops', function (Blueprint $table) {
             $table->id('id');
-            $table->string('name');
-            $table->integer('teacher');
-            $table->string('description');
+            $table->string('name_workshop');
+            $table->string('teacher');
+            $table->string('description_workshop');
             $table->datetime('start');
             $table->datetime('end');
             $table->decimal('price')->default(0);

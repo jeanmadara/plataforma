@@ -28,7 +28,7 @@ class Categorie extends Model
 
 
     public $fillable = [
-        'name',
+        'name_categorie',
         'detail'
     ];
 
@@ -38,7 +38,7 @@ class Categorie extends Model
      * @var array
      */
     protected $casts = [
-        'name' => 'string',
+        'name_categorie' => 'string',
         'detail' => 'string'
     ];
 
@@ -48,7 +48,7 @@ class Categorie extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required'
+        'name_categorie' => 'required'
     ];
 
     

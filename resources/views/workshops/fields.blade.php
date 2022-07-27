@@ -1,18 +1,18 @@
 <!-- Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('name', 'Nombre de Workshop:') !!}
-    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+    {!! Form::label('name_workshop', 'Nombre de Workshop:') !!}
+    {!! Form::text('name_workshop', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- teacher Id Field -->
 <div class="form-group col-sm-6">
-    {{ Form::hidden('teacher', auth()->id()) }}
+    {{ Form::hidden('teacher', $teacher->implode("full_name")) }}
 </div>
 
 <!-- Description Field -->
 <div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('description', 'Breve Descripción:') !!}
-    {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+    {!! Form::label('description_workshop', 'Breve Descripción:') !!}
+    {!! Form::textarea('description_workshop', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Start Field -->

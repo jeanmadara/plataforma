@@ -38,7 +38,7 @@
 
     <div class="card">
         <div class="card-body register-card-body">
-            <p class="login-box-msg">Register a new membership</p>
+            <p class="login-box-msg">Registrar un nuevo usuario</p>
 
             <form method="post" action="{{ route('register') }}">
                 @csrf
@@ -48,7 +48,7 @@
                            name="name"
                            class="form-control @error('name') is-invalid @enderror"
                            value="{{ old('name') }}"
-                           placeholder="Full name">
+                           placeholder="Nombre de Usuario">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -58,6 +58,24 @@
                     <span class="error invalid-feedback">{{ $message }}</span>
                     @enderror
                 </div>
+
+                <div class="input-group mb-3">
+                    <input type="text"
+                           name="full_name"
+                           class="form-control @error('name') is-invalid @enderror"
+                           value="{{ old('full_name') }}"
+                           placeholder="Nombre Completo">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                    @error('name')
+                    <span class="error invalid-feedback">{{ $message }}</span>
+                    @enderror
+                </div>
+
+
 
                 <div class="input-group mb-3">
                     <input type="email"
@@ -111,7 +129,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        <button type="submit" class="btn btn-primary btn-block">Registrar</button>
                     </div>
                     <!-- /.col -->
                 </div>

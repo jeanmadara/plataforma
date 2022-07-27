@@ -32,9 +32,9 @@ class Workshop extends Model
 
 
     public $fillable = [
-        'name',
+        'name_workshop',
         'teacher',
-        'description',
+        'description_workshop',
         'start',
         'end',
         'price',
@@ -47,9 +47,9 @@ class Workshop extends Model
      * @var array
      */
     protected $casts = [
-        'name' => 'string',
+        'name_workshop' => 'string',
         'teacher' => 'string',
-        'description' => 'string',
+        'description_workshop' => 'string',
         'start' => 'datetime',
         'end' => 'datetime',
         'price' => 'decimal:2',
@@ -62,15 +62,15 @@ class Workshop extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required',
+        'name_workshop' => 'required',
         'teacher' => 'required',
-        'description' => 'required',
+        'description_workshop' => 'required',
         'start' => 'required',
         'end' => 'required'
     ];
 
     public function users(){
-        return $this->belongsToMany('App\Models\User','user_workshop','workshop_id','user_id')->withTimestamps();
+        return $this->belongsToMany('App\Models\User','user_workshop','workshop_id','user_id')->withPivot('state');
     } 
     
 

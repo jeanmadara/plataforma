@@ -1,7 +1,7 @@
 <!-- Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('name', 'Nombre:') !!}
-    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+    {!! Form::label('name_categorie', 'Nombre:') !!}
+    {!! Form::text('name_categorie', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Detail Field -->

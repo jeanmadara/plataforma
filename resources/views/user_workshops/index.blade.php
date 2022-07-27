@@ -27,6 +27,8 @@
             <div class="card-body p-0">
                 @include('user_workshops.table')
 
+                @include('user_workshops.table_user')
+
                 <div class="card-footer clearfix">
                     <div class="float-right">
                         

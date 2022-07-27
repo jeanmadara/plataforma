@@ -25,9 +25,7 @@
 
         <div class="card">
             <div class="card-body p-0">
-                @can('workshops.destroy')
-                @include('workshops.table')
-                @endcan
+                
 
                 @can('workshops.index')
                 @include('workshops.table_user')
