@@ -55,6 +55,6 @@
 
 <!-- Categorie Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('categorie_id', 'Categoria:') !!}
-    {!! Form::select('categorie_id', $categories, null, ['class' => 'form-control custom-select']) !!}
+    
+    {{ Form::hidden('categorie_id', 1) }}
 </div>

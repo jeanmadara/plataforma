@@ -46,6 +46,7 @@ class WorkshopController extends AppBaseController
         ->join('users', 'users.id', '=', 'user_workshop.user_id')
         ->join('profiles', 'profiles.user_id', '=', 'users.id')
         ->where('user_workshop.user_id',$user)
+        ->where('workshops.categorie_id', 1)
         ->get();
 
         return view('workshops.index')
@@ -119,7 +120,7 @@ class WorkshopController extends AppBaseController
     {
         $workshop = $this->workshopRepository->find($id);
 
-        $categories = Categorie::pluck('name','id');
+        $categories = Categorie::pluck('name_categorie','id');
 
         $user = auth()->id();
 

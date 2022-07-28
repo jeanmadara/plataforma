@@ -55,7 +55,7 @@ class ActivitieController extends AppBaseController
         ->join('users as us', 'us.id', '=', 'uw.user_id')
         ->join('profiles as p', 'p.user_id', '=', 'us.id')
         ->join('categories as c', 'c.id', '=', 'w.categorie_id')
-        //->where('uw.user_id', '!=', $user_id)
+        ->where('w.categorie_id', '!=', 1)
         ->select( 'w.*', 'name_categorie', 'state')->get();
 
      
@@ -77,6 +77,7 @@ class ActivitieController extends AppBaseController
 
         return view('activities.create',compact('categories'),compact('teacher'));
     }
+
     /**
      * Store a newly created user_workshop in storage.
      *
@@ -105,17 +106,18 @@ class ActivitieController extends AppBaseController
      *
      * @return Response
      */
+    
     public function show($id)
     {
-        $userWorkshop = $this->userWorkshopRepository->find($id);
+        $workshop = $this->workshopRepository->find($id);
 
-        if (empty($userWorkshop)) {
-            Flash::error('User Workshop not found');
+        if (empty($workshop)) {
+            Flash::error('Workshop not found');
 
-            return redirect(route('userWorkshops.index'));
+            return redirect(route('activities.index'));
         }
 
-        return view('activities.show')->with('userWorkshop', $userWorkshop);
+        return view('activities.show')->with('workshop', $workshop);
     }
 
     /**

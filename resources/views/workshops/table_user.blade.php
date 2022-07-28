@@ -7,7 +7,7 @@
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
         <th>Precio</th>
-        <th>Categorie Id</th>
+        
         <th>Docente</th>
         @can('workshops.create')<th colspan="3">Acciones</th>@endcan
         </tr>
@@ -19,8 +19,8 @@
             <td>{{ $workshop->description_workshop }}</td>
             <td>{{ $workshop->start }}</td>
             <td>{{ $workshop->end }}</td>
-            <td>{{ $workshop->price }}</td>
-            <td>{{ $workshop->categorie_id }}</td>
+            <td>${{ $workshop->price }}</td>
+            
             <td>{{ $workshop->teacher}}</td>
             @can('workshops.create')<td width="120">
                     {!! Form::open(['route' => ['workshops.destroy', $workshop->id], 'method' => 'delete']) !!}
@@ -32,8 +32,9 @@
                         <a href="{{ route('workshops.edit', [$workshop->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
-                        </a>
+                        </a>@can('workshops.destroy')
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿estas seguro?')"]) !!}
+                        @endcan
                     </div>
                     {!! Form::close() !!}
                 </td>@endcan

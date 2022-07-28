@@ -1,48 +1,29 @@
 <!-- Name Field -->
 <div class="col-sm-12">
-    {!! Form::label('name_workshop', 'Name:') !!}
+    {!! Form::label('name_workshop', 'Nombre del Curso:') !!}
     <p>{{ $workshop->name_workshop }}</p>
 </div>
 
 <!-- Description Field -->
 <div class="col-sm-12">
-    {!! Form::label('description', 'Description:') !!}
-    <p>{{ $workshop->description }}</p>
+    {!! Form::label('description', 'descrición:') !!}
+    <p>{{ $workshop->description_workshop }}</p>
 </div>
 
 <!-- Start Field -->
 <div class="col-sm-12">
-    {!! Form::label('start', 'Start:') !!}
+    {!! Form::label('start', 'Fecha de inicio:') !!}
     <p>{{ $workshop->start }}</p>
 </div>
 
 <!-- End Field -->
 <div class="col-sm-12">
-    {!! Form::label('end', 'End:') !!}
+    {!! Form::label('end', 'Fecha Fin:') !!}
     <p>{{ $workshop->end }}</p>
 </div>
 
 <!-- Price Field -->
 <div class="col-sm-12">
-    {!! Form::label('price', 'Price:') !!}
-    <p>{{ $workshop->price }}</p>
+    {!! Form::label('price', 'Precio:') !!}
+    <p>${{ $workshop->price }}</p>
 </div>
-
-<!-- Categorie Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('categorie_id', 'Categorie Id:') !!}
-    <p>{{ $workshop->categorie_id }}</p>
-</div>
-
-<!-- Created At Field -->
-<div class="col-sm-12">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $workshop->created_at }}</p>
-</div>
-
-<!-- Updated At Field -->
-<div class="col-sm-12">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $workshop->updated_at }}</p>
-</div>
-

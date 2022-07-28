@@ -1,30 +1,30 @@
-<!-- State Field -->
+<!-- Name Field -->
 <div class="col-sm-12">
-    {!! Form::label('state', 'State:') !!}
-    <p>{{ $userWorkshop->state }}</p>
+    {!! Form::label('name_workshop', 'Nombre de la actividad:') !!}
+    <p>{{ $workshop->name_workshop }}</p>
 </div>
 
-<!-- User Id Field -->
+<!-- Description Field -->
 <div class="col-sm-12">
-    {!! Form::label('user_id', 'User Id:') !!}
-    <p>{{ $userWorkshop->user_id }}</p>
+    {!! Form::label('description', 'descrición:') !!}
+    <p>{{ $workshop->description_workshop }}</p>
 </div>
 
-<!-- Workshop Id Field -->
+<!-- Start Field -->
 <div class="col-sm-12">
-    {!! Form::label('workshop_id', 'Workshop Id:') !!}
-    <p>{{ $userWorkshop->workshop_id }}</p>
+    {!! Form::label('start', 'Fecha de inicio:') !!}
+    <p>{{ $workshop->start }}</p>
 </div>
 
-<!-- Created At Field -->
+<!-- End Field -->
 <div class="col-sm-12">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $userWorkshop->created_at }}</p>
+    {!! Form::label('end', 'Fecha Fin:') !!}
+    <p>{{ $workshop->end }}</p>
 </div>
 
-<!-- Updated At Field -->
+<!-- Price Field -->
 <div class="col-sm-12">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $userWorkshop->updated_at }}</p>
+    {!! Form::label('price', 'Precio:') !!}
+    <p>${{ $workshop->price }}</p>
 </div>
 

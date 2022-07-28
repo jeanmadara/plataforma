@@ -79,7 +79,7 @@
     </a>
 </li>
 @endcan 
-@can('workshops.index')
+@can('workshops.create')
 <li class="nav-item">
     <a href="{{ route('workshops.create') }}"
        class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
@@ -91,7 +91,7 @@
 <li class="nav-item">
     <a href="{{ route('userWorkshops.index') }}"
        class="nav-link {{ Request::is('userWorkshops*') ? 'active' : '' }}">
-        <p>inscripción</p>
+        <p>Cursos Disponibles</p>
     </a>
 </li> 
 @endcan
@@ -111,18 +111,18 @@
     <div id="collapse4" class="panel-collapse collapse">
    
     <li class="nav-item">
-    <a href="{{ route('userWorkshops.index') }}"
+    <a href="{{ route('activities.index') }}"
        class="nav-link {{ Request::is('userWorkshops*') ? 'active' : '' }}">
         <p>Actividades</p>
     </a>
     </li>
-    
+    @can('activities.create')
     <li class="nav-item">
     <a href="{{ route('activities.create') }}"
        class="nav-link {{ Request::is('userWorkshops*') ? 'active' : '' }}">
         <p>Nueva actividad</p>
     </a>
-</li> 
+</li> @endcan
 
 
     </div>

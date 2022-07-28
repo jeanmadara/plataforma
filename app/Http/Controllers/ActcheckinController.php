@@ -13,7 +13,7 @@ use App\Models\User;
 use App\Models\Workshop;
 use Illuminate\Support\Facades\DB;
 
-class user_workshopController extends AppBaseController
+class ActcheckinController extends AppBaseController
 {
     /** @var user_workshopRepository $userWorkshopRepository*/
     private $userWorkshopRepository;
@@ -40,11 +40,11 @@ class user_workshopController extends AppBaseController
         ->join('users as us', 'us.id', '=', 'uw.user_id')
         ->join('profiles as p', 'p.user_id', '=', 'us.id')
         ->join('categories as c', 'c.id', '=', 'w.categorie_id')
-        ->where('w.categorie_id', 1)
+        ->where('w.categorie_id', '!=', 1)
         ->select( 'w.*', 'name_categorie', 'state')->get();
 
      
-        return view('user_workshops.index',compact('workshops_user'))
+        return view('activities.index',compact('workshops_user'))
             ->with('userWorkshops', $userWorkshops);
     }
 
@@ -69,11 +69,11 @@ class user_workshopController extends AppBaseController
 
         $workshops = DB::table('workshops as w')
         ->distinct()->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
-        ->where('categorie_id', 1)
+        ->where('categorie_id', '!=', 1)
         ->whereNotIn('workshop_id', $exp)
         ->pluck('name_workshop','w.id');
 
-        return view('user_workshops.create',compact('users'),compact('workshops'));
+        return view('activities.create_checkin',compact('users'),compact('workshops'));
     }
 
     /**
@@ -91,7 +91,7 @@ class user_workshopController extends AppBaseController
 
         Flash::success('User Workshop saved successfully.');
 
-        return redirect(route('workshops.index'));
+        return redirect(route('activities.index'));
     }
 
     /**
@@ -111,7 +111,7 @@ class user_workshopController extends AppBaseController
             return redirect(route('userWorkshops.index'));
         }
 
-        return view('user_workshops.show')->with('userWorkshop', $userWorkshop);
+        return view('activities.show')->with('userWorkshop', $userWorkshop);
     }
 
     /**
@@ -131,7 +131,7 @@ class user_workshopController extends AppBaseController
             return redirect(route('userWorkshops.index'));
         }
 
-        return view('user_workshops.edit')->with('userWorkshop', $userWorkshop);
+        return view('activities.edit')->with('userWorkshop', $userWorkshop);
     }
 
     /**
@@ -149,14 +149,14 @@ class user_workshopController extends AppBaseController
         if (empty($userWorkshop)) {
             Flash::error('User Workshop not found');
 
-            return redirect(route('userWorkshops.index'));
+            return redirect(route('activities.index'));
         }
 
         $userWorkshop = $this->userWorkshopRepository->update($request->all(), $id);
 
         Flash::success('User Workshop updated successfully.');
 
-        return redirect(route('userWorkshops.index'));
+        return redirect(route('activities.index'));
     }
 
     /**
@@ -175,13 +175,13 @@ class user_workshopController extends AppBaseController
         if (empty($userWorkshop)) {
             Flash::error('User Workshop not found');
 
-            return redirect(route('userWorkshops.index'));
+            return redirect(route('activities.index'));
         }
 
         $this->userWorkshopRepository->delete($id);
 
         Flash::success('User Workshop deleted successfully.');
 
-        return redirect(route('userWorkshops.index'));
+        return redirect(route('activities.index'));
     }
 }
