@@ -41,6 +41,14 @@ class UserSeeder extends Seeder
             'remember_token'=>Str :: random(10),
            ])->assignRole('docente');
 
+           User :: create([
+            'name'=>'estudiante',
+            'email'=>'estudiante@gmail.com',
+            'email_verified_at'=>now(),
+            'password'=>'$2y$10$5tcFq9Oke56pSW7vUuCm0.tEA966ahCm.fk77H9OZbZ3m0woIZU2S',// password
+            'remember_token'=>Str :: random(10),
+           ])->assignRole('estudiante');
+
            
 
 

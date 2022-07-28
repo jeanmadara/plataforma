@@ -16,7 +16,7 @@ class CategorieSeeder extends Seeder
     {
         //
         Categorie :: create([
-            'name'=>'Curso',
+            'name_categorie'=>'Curso',
             'detail'=>'Cursos que oferta el Centro Cultural', 
            ]);
     }

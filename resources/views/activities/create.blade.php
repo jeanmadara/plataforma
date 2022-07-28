@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Create User Workshop</h1>
+                    <h1>Nueva Actividad</h1>
                 </div>
             </div>
         </div>
@@ -17,24 +17,19 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'userWorkshops.store']) !!}
+            {!! Form::open(['route' => 'activities.store']) !!}
 
             <div class="card-body">
 
-            
-            @can('workshops.create')<div class="row">
-                    @include('user_workshops.fields')
-                </div>@endcan
-
-                @can('student.index')<div class="row">
-                    @include('user_workshops.fields_user')
-                </div>@endcan
+                <div class="row">
+                    @include('activities.fields')
+                </div>
 
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('userWorkshops.index') }}" class="btn btn-default">Cancelar</a>
+                <a href="{{ route('activities.index') }}" class="btn btn-default">Cancelar</a>
             </div>
 
             {!! Form::close() !!}

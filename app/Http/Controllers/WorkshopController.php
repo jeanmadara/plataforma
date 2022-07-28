@@ -59,7 +59,7 @@ class WorkshopController extends AppBaseController
      */
     public function create()
     {
-        $categories = Categorie::pluck('name','id');
+        $categories = Categorie::pluck('name_categorie','id');
         $user = auth()->id();
 
         $teacher = Profile::where('user_id', $user)->get();

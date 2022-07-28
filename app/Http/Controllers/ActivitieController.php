@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateWorkshopRequest;
+use App\Http\Requests\UpdateWorkshopRequest;
+use App\Repositories\WorkshopRepository;
+
 use App\Http\Requests\Createuser_workshopRequest;
 use App\Http\Requests\Updateuser_workshopRequest;
 use App\Repositories\user_workshopRepository;
@@ -12,16 +16,27 @@ use Response;
 use App\Models\User;
 use App\Models\Workshop;
 use Illuminate\Support\Facades\DB;
+use App\Models\Categorie;
+use App\Models\Profile;
 
-class user_workshopController extends AppBaseController
+class ActivitieController extends AppBaseController
 {
     /** @var user_workshopRepository $userWorkshopRepository*/
     private $userWorkshopRepository;
 
-    public function __construct(user_workshopRepository $userWorkshopRepo)
+    /** @var WorkshopRepository $workshopRepository*/
+    private $workshopRepository;
+
+    public function __construct(user_workshopRepository $userWorkshopRepo,WorkshopRepository $workshopRepo)
     {
         $this->userWorkshopRepository = $userWorkshopRepo;
+
+        $this->workshopRepository = $workshopRepo;
     }
+
+    
+
+  
 
     /**
      * Display a listing of the user_workshop.
@@ -44,7 +59,7 @@ class user_workshopController extends AppBaseController
         ->select( 'w.*', 'name_categorie', 'state')->get();
 
      
-        return view('user_workshops.index',compact('workshops_user'))
+        return view('activities.index',compact('workshops_user'))
             ->with('userWorkshops', $userWorkshops);
     }
 
@@ -55,27 +70,13 @@ class user_workshopController extends AppBaseController
      */
     public function create()
     {
-        $user_id = auth()->id();
+        $categories = Categorie::pluck('name_categorie','id');
+        $user = auth()->id();
 
-        $users = User::pluck('name','id');
-        
-        $workshop_us = DB::table('user_workshop')
-        ->where('user_id', '=', $user_id)
-        ->pluck('workshop_id');
+        $teacher = Profile::where('user_id', $user)->get();
 
-        $json = json_encode($workshop_us);
-        $a=preg_replace('/[^0-9,.]/', '', $json);
-        $exp = explode(',', $a);    
-
-        $workshops = DB::table('workshops as w')
-        ->distinct()->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
-        //->where('user_id', '!=', $user_id)
-        ->whereNotIn('workshop_id', $exp)
-        ->pluck('name_workshop','w.id');
-
-        return view('user_workshops.create',compact('users'),compact('workshops'));
+        return view('activities.create',compact('categories'),compact('teacher'));
     }
-
     /**
      * Store a newly created user_workshop in storage.
      *
@@ -83,15 +84,18 @@ class user_workshopController extends AppBaseController
      *
      * @return Response
      */
-    public function store(Createuser_workshopRequest $request)
+    public function store(CreateWorkshopRequest $request)
     {
         $input = $request->all();
+        $user_id = auth()->id();
 
-        $userWorkshop = $this->userWorkshopRepository->create($input);
+        $workshop = $this->workshopRepository->create($input);
 
-        Flash::success('User Workshop saved successfully.');
+        $workshop->users()->attach($user_id); 
 
-        return redirect(route('workshops.index'));
+        Flash::success('Workshop saved successfully.');
+
+        return redirect(route('activities.index'));
     }
 
     /**
@@ -111,7 +115,7 @@ class user_workshopController extends AppBaseController
             return redirect(route('userWorkshops.index'));
         }
 
-        return view('user_workshops.show')->with('userWorkshop', $userWorkshop);
+        return view('activities.show')->with('userWorkshop', $userWorkshop);
     }
 
     /**
@@ -131,7 +135,7 @@ class user_workshopController extends AppBaseController
             return redirect(route('userWorkshops.index'));
         }
 
-        return view('user_workshops.edit')->with('userWorkshop', $userWorkshop);
+        return view('activities.edit')->with('userWorkshop', $userWorkshop);
     }
 
     /**
@@ -149,14 +153,14 @@ class user_workshopController extends AppBaseController
         if (empty($userWorkshop)) {
             Flash::error('User Workshop not found');
 
-            return redirect(route('userWorkshops.index'));
+            return redirect(route('activities.index'));
         }
 
         $userWorkshop = $this->userWorkshopRepository->update($request->all(), $id);
 
         Flash::success('User Workshop updated successfully.');
 
-        return redirect(route('userWorkshops.index'));
+        return redirect(route('activities.index'));
     }
 
     /**
@@ -182,6 +186,6 @@ class user_workshopController extends AppBaseController
 
         Flash::success('User Workshop deleted successfully.');
 
-        return redirect(route('userWorkshops.index'));
+        return redirect(route('activities.index'));
     }
 }

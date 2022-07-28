@@ -5,14 +5,16 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Workshops</h1>
+                    <h1>Mis Cursos</h1>
                 </div>
+                @can('workshops.create')
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('workshops.create') }}">
                         Agregar Nuevo
                     </a>
                 </div>
+                @endcan
             </div>
         </div>
     </section>

@@ -4,12 +4,14 @@
         <tr>
             <th>Nombre</th>
         <th>Descripción</th>
+        <th>Docente</th>
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
         <th>Precio</th>
         <th>Categorie Id</th>
-        <th>Docente</th>
-        @can('workshops.create')<th colspan="3">Acciones</th>@endcan
+        <th>state</th>
+        
+            <th colspan="3">Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -17,12 +19,14 @@
             <tr>
                 <td>{{ $workshop->name_workshop }}</td>
             <td>{{ $workshop->description_workshop }}</td>
+            <td>{{ $workshop->teacher}}</td>
             <td>{{ $workshop->start }}</td>
             <td>{{ $workshop->end }}</td>
             <td>{{ $workshop->price }}</td>
-            <td>{{ $workshop->categorie_id }}</td>
-            <td>{{ $workshop->teacher}}</td>
-            @can('workshops.create')<td width="120">
+            <td>{{ $workshop->name_categorie }}</td>
+            <td>{{ $workshop->state }}</td>
+            
+                <td width="120">
                     {!! Form::open(['route' => ['workshops.destroy', $workshop->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
                         <a href="{{ route('workshops.show', [$workshop->id]) }}"
@@ -36,7 +40,7 @@
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿estas seguro?')"]) !!}
                     </div>
                     {!! Form::close() !!}
-                </td>@endcan
+                </td>
             </tr>
         @endforeach
         </tbody>

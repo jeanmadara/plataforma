@@ -70,7 +70,8 @@ class Workshop extends Model
     ];
 
     public function users(){
-        return $this->belongsToMany('App\Models\User','user_workshop','workshop_id','user_id')->withPivot('state');
+        return $this->belongsToMany('App\Models\User','user_workshop','workshop_id','user_id')
+        ->withPivot('state','user_id');
     } 
     
 

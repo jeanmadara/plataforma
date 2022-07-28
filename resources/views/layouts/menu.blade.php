@@ -79,34 +79,54 @@
     </a>
 </li>
 @endcan 
-
+@can('workshops.index')
+<li class="nav-item">
+    <a href="{{ route('workshops.create') }}"
+       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
+        <p>Nuevo Curso</p>
+    </a>
+</li>
+@endcan 
+@can('student.index')
 <li class="nav-item">
     <a href="{{ route('userWorkshops.index') }}"
        class="nav-link {{ Request::is('userWorkshops*') ? 'active' : '' }}">
         <p>inscripción</p>
     </a>
 </li> 
+@endcan
     </div>
 @endcan
 
 <!-- Otras Actividades  -->
 
-@can('scholarships.index')
-<div class="panel-group">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h5 class="panel-title">
-      <li class="nav-item">
-        <a data-toggle="collapse" href="#collapse4" class="nav-link"><p>Otras Actividades</p></a>
-        <li class="nav-item">
-      </h5>
-    </div>
+@can('activities.index')
+<li class="nav-item">
+        <a data-toggle="collapse" href="#collapse4" class="nav-link"><p><h5>Otras Actividades</h5></p></a>
+        </li>
+     
+    
+
     
     <div id="collapse4" class="panel-collapse collapse">
+   
+    <li class="nav-item">
+    <a href="{{ route('userWorkshops.index') }}"
+       class="nav-link {{ Request::is('userWorkshops*') ? 'active' : '' }}">
+        <p>Actividades</p>
+    </a>
+    </li>
     
+    <li class="nav-item">
+    <a href="{{ route('activities.create') }}"
+       class="nav-link {{ Request::is('userWorkshops*') ? 'active' : '' }}">
+        <p>Nueva actividad</p>
+    </a>
+</li> 
+
+
     </div>
-  </div>
-</div>
+
 @endcan
 
 

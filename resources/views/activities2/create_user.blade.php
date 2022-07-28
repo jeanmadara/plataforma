@@ -21,14 +21,9 @@
 
             <div class="card-body">
 
-            
-            @can('workshops.create')<div class="row">
+                <div class="row">
                     @include('user_workshops.fields')
-                </div>@endcan
-
-                @can('student.index')<div class="row">
-                    @include('user_workshops.fields_user')
-                </div>@endcan
+                </div>
 
             </div>
 
