@@ -74,6 +74,27 @@ class Workshop extends Model
         ->withPivot('state','user_id');
     } 
     
+    //Query Scope
 
+    public function scopeNecesidad($query, $name_categorie)
+    {
+        if($name_categorie)
+            return $query->where('categorie_id', 'LIKE', "%$name_categorie%");
+            //->join('necesidads', 'fuente_necesidads.necesidad_id', '=', 'necesidads.id');
+    }
+
+    public function scopeFcv($query, $teacher)
+    {
+        if($teacher)
+            return $query->where('teacher', 'LIKE', "%$teacher%");
+            //->join('necesidads', 'fuente_necesidads.necesidad_id', '=', 'necesidads.id');
+    }
+
+    public function scopeBibliografia($query, $name_workshop)
+    {
+        if($name_workshop)
+            return $query->where('name_workshop', 'LIKE', "%$name_workshop%");
+    }
+    
     
 }

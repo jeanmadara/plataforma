@@ -36,7 +36,6 @@ Route::resource('profiles', App\Http\Controllers\ProfileController::class);
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RolController::class);
     Route::resource('usuarios', UsuarioController::class);
-    Route::resource('blogs', BlogController::class);
 });
 
 
@@ -47,6 +46,8 @@ Route::resource('actcheckins', App\Http\Controllers\ActcheckinController::class)
 
 
 Route::resource('userWorkshops', App\Http\Controllers\user_workshopController::class);
+
+Route::get('boletines', [App\Http\Controllers\WorkshopController::class,'lista'])->name('boletines');
 
 
 Route::resource('sessions', App\Http\Controllers\SessionController::class);

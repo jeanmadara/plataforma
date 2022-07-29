@@ -152,4 +152,9 @@
     </a>
 </li>
 
-
+<li class="nav-item">
+    <a href="{{ route('boletines') }}"
+       class="nav-link {{ Request::is('sessions*') ? 'active' : '' }}">
+        <p>reportes</p>
+    </a>
+</li>

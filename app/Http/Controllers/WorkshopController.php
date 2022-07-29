@@ -35,6 +35,32 @@ class WorkshopController extends AppBaseController
      *
      * @return Response
      */
+    public function lista(Request $request)
+    {
+        
+        /*$nece = Necesidad::
+        join('investigacion_necesidad  as in', 'in.necesidad_id', '=', 'necesidads.id')
+        ->where('investigacion_id',$id)
+        ->pluck('nombre','nombre');categories*/
+        $categorie = Categorie::pluck('name_categorie','id');
+        
+
+        $name_categorie  = $request->get('name_categorie');
+        $teacher = $request->get('teacher');
+        $biblio   = $request->get('name_workshop');
+
+            $workshops_user = Workshop::orderBy('name_workshop', 'DESC')
+            ->necesidad($name_categorie)
+            ->fcv($teacher)
+            ->bibliografia($teacher)
+            ->paginate(8);    
+
+
+        
+
+        return view('user_workshops.lista',compact('categorie'))
+        ->with('workshops_user', $workshops_user);
+    } 
     public function index(Request $request)
     {
         $workshops = $this->workshopRepository->all();
