@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
 class SessionController extends AppBaseController
 {
     /** @var SessionRepository $sessionRepository*/
@@ -42,7 +45,26 @@ class SessionController extends AppBaseController
      */
     public function create()
     {
-        return view('sessions.create');
+        $user_id = auth()->id();
+
+        $users = User::pluck('name','id');
+        
+        $workshop_us = DB::table('user_workshop')
+        ->where('user_id', '=', $user_id)
+        ->pluck('workshop_id');
+
+        $json = json_encode($workshop_us);
+        $a=preg_replace('/[^0-9,.]/', '', $json);
+        $exp = explode(',', $a);    
+
+        $workshop_id = DB::table('workshops as w')
+        //->distinct()
+        ->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
+        ->where('categorie_id', 1)
+        ->where('user_id', $user_id)
+        ->pluck('name_workshop','w.id');
+
+        return view('sessions.create',compact('workshop_id'));
     }
 
     /**

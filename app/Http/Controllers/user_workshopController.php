@@ -59,18 +59,18 @@ class user_workshopController extends AppBaseController
 
         $users = User::pluck('name','id');
         
-        $workshop_us = DB::table('user_workshop')
-        ->where('user_id', '=', $user_id)
-        ->pluck('workshop_id');
+        //$workshop_us = DB::table('user_workshop')
+        //->where('user_id', '=', $user_id)
+        //->pluck('workshop_id');
 
-        $json = json_encode($workshop_us);
-        $a=preg_replace('/[^0-9,.]/', '', $json);
-        $exp = explode(',', $a);    
+        //$json = json_encode($workshop_us);
+        //$a=preg_replace('/[^0-9,.]/', '', $json);
+        //$exp = explode(',', $a);    
 
         $workshops = DB::table('workshops as w')
         ->distinct()->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
-        ->where('categorie_id', 1)
-        ->whereNotIn('workshop_id', $exp)
+        //->where('categorie_id', 1)
+        //->whereNotIn('workshop_id', $exp)
         ->pluck('name_workshop','w.id');
 
         return view('user_workshops.create',compact('users'),compact('workshops'));

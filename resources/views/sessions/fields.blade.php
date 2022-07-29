@@ -39,5 +39,5 @@
 <!-- Workshop Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('workshop_id', 'Workshop Id:') !!}
-    {!! Form::select('workshop_id', ], null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::select('workshop_id', $workshop_id, null, ['class' => 'form-control custom-select']) !!}
 </div>
