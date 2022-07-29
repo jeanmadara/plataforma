@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Edit User Workshop</h1>
+                    <h1>Editar Actividad</h1>
                 </div>
             </div>
         </div>
@@ -17,17 +17,17 @@
 
         <div class="card">
 
-            {!! Form::model($userWorkshop, ['route' => ['userWorkshops.update', $userWorkshop->id], 'method' => 'patch']) !!}
+            {!! Form::model($workshop, ['route' => ['activities.update', $workshop->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
                 <div class="row">
-                    @include('user_workshops.fields')
+                    @include('activities.fields')
                 </div>
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('userWorkshops.index') }}" class="btn btn-default">Cancel</a>
+                {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('activities.index') }}" class="btn btn-default">Cancelar</a>
             </div>
 
             {!! Form::close() !!}

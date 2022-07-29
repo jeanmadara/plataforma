@@ -73,6 +73,7 @@ class RoleSeeder extends Seeder
 
         Permission :: create(['name'=>'admin.index'])->syncRoles([$estudiante,]);
         Permission :: create(['name'=>'student.index'])->syncRoles([$estudiante,]);
+        Permission :: create(['name'=>'teacher.index'])->syncRoles([$docente,]);
         Permission :: create(['name'=>'student.teacher'])->syncRoles([$estudiante,$docente]);
 
 

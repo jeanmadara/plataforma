@@ -4,14 +4,14 @@
         <tr>
             <th>Nombre</th>
         <th>Descripción</th>
-        <th>Docente</th>
+        <th>Responsable</th>
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
         <th>Precio</th>
-        <th>Categorie Id</th>
-        <th>state</th>
+        <th>Tipo de Actividad</th>
+        <th>estado</th>
         
-            <th colspan="3">Acciones</th>
+        @can('activities.edit')<th colspan="3">Acciones</th>@endcan
         </tr>
         </thead>
         <tbody>
@@ -22,25 +22,27 @@
             <td>{{ $workshop->teacher}}</td>
             <td>{{ $workshop->start }}</td>
             <td>{{ $workshop->end }}</td>
-            <td>{{ $workshop->price }}</td>
+            <td>${{ $workshop->price }}</td>
             <td>{{ $workshop->name_categorie }}</td>
             <td>{{ $workshop->state }}</td>
             
-                <td width="120">
-                    {!! Form::open(['route' => ['workshops.destroy', $workshop->id], 'method' => 'delete']) !!}
+            @can('activities.edit')<td width="120">
+                    {!! Form::open(['route' => ['activities.destroy', $workshop->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('workshops.show', [$workshop->id]) }}"
+                        <a href="{{ route('activities.show', [$workshop->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('workshops.edit', [$workshop->id]) }}"
+                        @can('activities.edit')<a href="{{ route('activities.edit', [$workshop->id]) }}"
                            class='btn btn-default btn-xs'>
-                            <i class="far fa-edit"></i>
+                            <i class="far fa-edit"></i>@endcan
                         </a>
+                        @can('activities.destroy')
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿estas seguro?')"]) !!}
+                        @endcan
                     </div>
                     {!! Form::close() !!}
-                </td>
+                </td>@endcan
             </tr>
         @endforeach
         </tbody>

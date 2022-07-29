@@ -56,6 +56,7 @@ class ActivitieController extends AppBaseController
         ->join('profiles as p', 'p.user_id', '=', 'us.id')
         ->join('categories as c', 'c.id', '=', 'w.categorie_id')
         ->where('w.categorie_id', '!=', 1)
+        ->where('uw.user_id',$user_id)
         ->select( 'w.*', 'name_categorie', 'state')->get();
 
      
@@ -129,44 +130,50 @@ class ActivitieController extends AppBaseController
      */
     public function edit($id)
     {
-        $userWorkshop = $this->userWorkshopRepository->find($id);
+        $workshop = $this->workshopRepository->find($id);
 
-        if (empty($userWorkshop)) {
-            Flash::error('User Workshop not found');
+        $categories = Categorie::pluck('name_categorie','id');
 
-            return redirect(route('userWorkshops.index'));
-        }
+        $user = auth()->id();
 
-        return view('activities.edit')->with('userWorkshop', $userWorkshop);
-    }
+        $teacher = Profile::where('user_id', $user)->get();
 
-    /**
-     * Update the specified user_workshop in storage.
-     *
-     * @param int $id
-     * @param Updateuser_workshopRequest $request
-     *
-     * @return Response
-     */
-    public function update($id, Updateuser_workshopRequest $request)
-    {
-        $userWorkshop = $this->userWorkshopRepository->find($id);
-
-        if (empty($userWorkshop)) {
-            Flash::error('User Workshop not found');
+        if (empty($workshop)) {
+            Flash::error('Workshop not found');
 
             return redirect(route('activities.index'));
         }
 
-        $userWorkshop = $this->userWorkshopRepository->update($request->all(), $id);
+        return view('activities.edit',compact('categories'),compact('teacher'))->with('workshop', $workshop);
+    }
 
-        Flash::success('User Workshop updated successfully.');
+    /**
+     * Update the specified Workshop in storage.
+     *
+     * @param int $id
+     * @param UpdateWorkshopRequest $request
+     *
+     * @return Response
+     */
+    public function update($id, UpdateWorkshopRequest $request)
+    {
+        $workshop = $this->workshopRepository->find($id);
+
+        if (empty($workshop)) {
+            Flash::error('Workshop not found');
+
+            return redirect(route('activities.index'));
+        }
+
+        $workshop = $this->workshopRepository->update($request->all(), $id);
+
+        Flash::success('Workshop updated successfully.');
 
         return redirect(route('activities.index'));
     }
 
     /**
-     * Remove the specified user_workshop from storage.
+     * Remove the specified Workshop from storage.
      *
      * @param int $id
      *
@@ -176,17 +183,17 @@ class ActivitieController extends AppBaseController
      */
     public function destroy($id)
     {
-        $userWorkshop = $this->userWorkshopRepository->find($id);
+        $workshop = $this->workshopRepository->find($id);
 
-        if (empty($userWorkshop)) {
-            Flash::error('User Workshop not found');
+        if (empty($workshop)) {
+            Flash::error('Workshop not found');
 
-            return redirect(route('userWorkshops.index'));
+            return redirect(route('activities.index'));
         }
 
-        $this->userWorkshopRepository->delete($id);
+        $this->workshopRepository->delete($id);
 
-        Flash::success('User Workshop deleted successfully.');
+        Flash::success('Workshop deleted successfully.');
 
         return redirect(route('activities.index'));
     }

@@ -5,19 +5,21 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Cursos Disponibles</h1>
+                    <h1>Actividades</h1>
                 </div>
                 <div class="col-sm-6">
-                @can('workshops.destroy')
+                @can('activities.create')
                     <a class="btn btn-primary float-right"
-                       href="{{ route('userWorkshops.create') }}">
-                        Agregar Nuevo
+                       href="{{ route('activities.create') }}">
+                        Nueva Actividad
                     </a>@endcan
 
                     @can('student.index')<a class="btn btn-primary float-right"
-                       href="{{ route('userWorkshops.create') }}">
-                        inscribirme a un curso
+                       href="{{ route('actcheckins.create') }}">
+                        Registrarme a Actividad
                     </a>@endcan
+
+                    
                 </div>
 
             </div>
@@ -34,7 +36,7 @@
             <div class="card-body p-0">
 
 
-                @include('user_workshops.table_user')
+                @include('activities.table_user')
 
                 <div class="card-footer clearfix">
                     <div class="float-right">

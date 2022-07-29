@@ -44,7 +44,7 @@ class ActcheckinController extends AppBaseController
         ->select( 'w.*', 'name_categorie', 'state')->get();
 
      
-        return view('activities.index',compact('workshops_user'))
+        return view('actcheckin.index',compact('workshops_user'))
             ->with('userWorkshops', $userWorkshops);
     }
 
