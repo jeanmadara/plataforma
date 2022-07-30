@@ -63,14 +63,16 @@ class user_workshopController extends AppBaseController
         ->where('user_id', '=', $user_id)
         ->pluck('workshop_id');
 
-        //$ar = json_encode($workshop_us);
-        //$a=preg_replace('/[^0-9,.]/', '', $ar);
-        //$exp = explode(',', $a);    
+       
+        $a=preg_replace('/[^0-9,.]/', '', $workshop_us);
+        $exp = explode(',', $a);  
+        
+        //dd($exp);
 
         $workshops = DB::table('workshops as w')
         ->distinct()->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
         ->where('categorie_id', 1)
-        ->whereNotIn('workshop_id', [1,2])
+        ->whereNotIn('workshop_id', $exp)
         ->pluck('name_workshop','w.id');
 
         return view('user_workshops.create',compact('users'),compact('workshops'));
