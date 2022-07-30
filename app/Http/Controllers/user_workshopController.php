@@ -64,7 +64,7 @@ class user_workshopController extends AppBaseController
         ->pluck('workshop_id');
 
        
-        $a=preg_replace('/[^0-9,.]/', '', $workshop_us);
+        $a=preg_replace('/[^0-9,]/', '', $workshop_us);
         $exp = explode(',', $a);  
         
         //dd($exp);

@@ -68,10 +68,10 @@ class WorkshopController extends AppBaseController
         $user = auth()->id();
 
         $workshops_user = Workshop::
-        join('user_workshop', 'workshops.id', '=', 'user_workshop.workshop_id')
-        ->join('users', 'users.id', '=', 'user_workshop.user_id')
-        ->join('profiles', 'profiles.user_id', '=', 'users.id')
-        ->where('user_workshop.user_id',$user)
+        join('user_workshop as uw', 'workshops.id', '=', 'uw.workshop_id')
+        ->join('users as u', 'u.id', '=', 'uw.user_id')
+        ->join('profiles as p', 'p.user_id', '=', 'u.id')
+        ->where('uw.user_id',$user)
         ->where('workshops.categorie_id', 1)
         ->get();
 
