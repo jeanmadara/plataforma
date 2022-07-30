@@ -64,15 +64,12 @@ class user_workshopController extends AppBaseController
         ->pluck('workshop_id');
 
        
-        $a=preg_replace('/[^0-9,]/', '', $workshop_us);
-        $exp = explode(',', $a);  
-        
-        //dd($exp);
+        //dd($workshop_us);
 
         $workshops = DB::table('workshops as w')
         ->distinct()->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
         ->where('categorie_id', 1)
-        ->whereNotIn('workshop_id', $exp)
+        ->whereNotIn('workshop_id', $workshop_us)
         ->pluck('name_workshop','w.id');
 
         return view('user_workshops.create',compact('users'),compact('workshops'));
