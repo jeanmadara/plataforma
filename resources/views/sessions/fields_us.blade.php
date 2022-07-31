@@ -1,10 +1,9 @@
 <!-- Workshop Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('workshop_id', 'Seleccione el Curso:') !!}
-    {!! Form::select('workshop_id', $workshop_id, null, ['class' => 'form-control custom-select']) !!}
-</div>
+
+{{ Form::hidden('workshop_id', $workshop_id) }}
+
 <!-- Name Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-12">
     {!! Form::label('name', 'Nombre de la sesión:') !!}
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
@@ -18,6 +17,7 @@
     {!! Form::label('reference', 'Link de referencia:') !!}
     {!! Form::text('reference', null, ['class' => 'form-control']) !!}
 </div>
+
 <!-- Start Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('start', 'Fecha hora Inicio:') !!}
@@ -49,5 +49,6 @@
         })
     </script>
 @endpush
+
 
 

@@ -1,6 +1,6 @@
 <!-- Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('name_workshop', 'Nombre de Workshop:') !!}
+    {!! Form::label('name_workshop', 'Nombre del Curso:') !!}
     {!! Form::text('name_workshop', null, ['class' => 'form-control']) !!}
 </div>
 
@@ -11,7 +11,7 @@
 
 <!-- Description Field -->
 <div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('description_workshop', 'Breve Descripción:') !!}
+    {!! Form::label('description_workshop', 'Descripción Del Curso:') !!}
     {!! Form::textarea('description_workshop', null, ['class' => 'form-control']) !!}
 </div>
 

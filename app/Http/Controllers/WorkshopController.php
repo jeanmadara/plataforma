@@ -13,6 +13,7 @@ use Response;
 use App\Models\Categorie;
 use App\Models\Workshop;
 use App\Models\Profile;
+use Illuminate\Support\Facades\DB;
 
 class WorkshopController extends AppBaseController
 {
@@ -50,10 +51,13 @@ class WorkshopController extends AppBaseController
         $biblio   = $request->get('name_workshop');
 
             $workshops_user = Workshop::orderBy('name_workshop', 'DESC')
+            ->join('categories as c', 'c.id', '=', 'categorie_id')
             ->necesidad($name_categorie)
             ->fcv($teacher)
             ->bibliografia($teacher)
             ->paginate(8);    
+
+            
 
 
         
@@ -67,13 +71,22 @@ class WorkshopController extends AppBaseController
 
         $user = auth()->id();
 
-        $workshops_user = Workshop::
+        /*$workshops_user = Workshop::
         join('user_workshop as uw', 'workshops.id', '=', 'uw.workshop_id')
         ->join('users as u', 'u.id', '=', 'uw.user_id')
         ->join('profiles as p', 'p.user_id', '=', 'u.id')
         ->where('uw.user_id',$user)
         ->where('workshops.categorie_id', 1)
-        ->get();
+        ->get();*/
+
+        $workshops_user = DB::table('workshops as w')->distinct()
+        ->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
+        ->join('users as us', 'us.id', '=', 'uw.user_id')
+        ->join('profiles as p', 'p.user_id', '=', 'us.id')
+        ->join('categories as c', 'c.id', '=', 'w.categorie_id')
+        ->where('uw.user_id',$user)
+        ->where('w.categorie_id', 1)
+        ->select( 'w.*', 'name_categorie', 'state')->get();
 
         return view('workshops.index')
             ->with('workshops_user', $workshops_user);

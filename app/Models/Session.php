@@ -31,6 +31,8 @@ class Session extends Model
 
     public $fillable = [
         'name',
+        'description_session',
+        'reference',
         'start',
         'end',
         'workshop_id'
@@ -43,6 +45,8 @@ class Session extends Model
      */
     protected $casts = [
         'name' => 'string',
+        'description_session' => 'string',
+        'reference' => 'string',
         'start' => 'datetime',
         'end' => 'datetime',
         'workshop_id' => 'integer'
@@ -55,6 +59,7 @@ class Session extends Model
      */
     public static $rules = [
         'name' => 'required',
+        'description_session' => 'string',
         'start' => 'required',
         'end' => 'required',
         'workshop_id' => 'required'

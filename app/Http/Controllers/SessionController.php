@@ -11,6 +11,7 @@ use Flash;
 use Response;
 
 use App\Models\User;
+use App\Models\Workshop;
 use Illuminate\Support\Facades\DB;
 
 class SessionController extends AppBaseController
@@ -30,12 +31,44 @@ class SessionController extends AppBaseController
      *
      * @return Response
      */
+    public function addsession($id)
+    {
+        
+        $workshop_id = $id;
+
+        return view('sessions.create_us',compact('workshop_id'));
+    } 
+    public function sessionlist($id)
+    {
+        $workshop_id = $id;
+        $sessions = DB::table('sessions')
+        ->where('workshop_id', $workshop_id)
+        ->get();
+
+        return view('sessions.index_view')->with('sessions', $sessions);
+    }
     public function index(Request $request)
     {
-        $sessions = $this->sessionRepository->all();
+        $user = auth()->id();
+
+        /*$workshops = Workshop::
+        join('user_workshop as uw', 'workshops.id', '=', 'uw.workshop_id')
+        ->join('users as u', 'u.id', '=', 'uw.user_id')
+        ->join('profiles as p', 'p.user_id', '=', 'u.id')
+        ->where('uw.user_id',$user)
+        ->where('workshops.categorie_id', 1)
+        ->get();*/
+
+        $workshops = DB::table('workshops as w')
+        ->distinct()
+        ->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
+        ->join('users as us', 'us.id', '=', 'uw.user_id')
+        ->where('uw.user_id',$user)
+        ->where('w.categorie_id', 1)
+        ->get();
 
         return view('sessions.index')
-            ->with('sessions', $sessions);
+            ->with('workshops', $workshops);
     }
 
     /**
@@ -45,18 +78,8 @@ class SessionController extends AppBaseController
      */
     public function create()
     {
+    
         $user_id = auth()->id();
-
-        $users = User::pluck('name','id');
-        
-        $workshop_us = DB::table('user_workshop')
-        ->where('user_id', '=', $user_id)
-        ->pluck('workshop_id');
-
-        $json = json_encode($workshop_us);
-        $a=preg_replace('/[^0-9,.]/', '', $json);
-        $exp = explode(',', $a);    
-
         $workshop_id = DB::table('workshops as w')
         //->distinct()
         ->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')

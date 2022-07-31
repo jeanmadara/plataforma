@@ -9,8 +9,8 @@
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
-                       href="{{ route('sessions.create') }}">
-                        Añadir sesión
+                       href="{{ route('sessions.index') }}">
+                        Volver
                     </a>
                 </div>
             </div>
@@ -25,7 +25,7 @@
 
         <div class="card">
             <div class="card-body p-0">
-                @include('sessions.table')
+                @include('sessions.table_view')
 
                 <div class="card-footer clearfix">
                     <div class="float-right">

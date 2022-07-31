@@ -17,6 +17,8 @@ class CreateSessionsTable extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->id('id');
             $table->string('name');
+            $table->string('description_session');
+            $table->string('reference')->default('Sin Link');
             $table->datetime('start');
             $table->datetime('end');
             $table->unsignedBigInteger('workshop_id')->unsigned();

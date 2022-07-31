@@ -154,7 +154,7 @@
 
 <li class="nav-item">
     <a href="{{ route('boletines') }}"
-       class="nav-link {{ Request::is('sessions*') ? 'active' : '' }}">
+       class="nav-link {{ Request::is('profiles*') ? 'active' : '' }}">
         <p>reportes</p>
     </a>
 </li>

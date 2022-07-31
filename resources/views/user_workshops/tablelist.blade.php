@@ -2,14 +2,14 @@
     <table class="table" id="workshops-table">
         <thead>
         <tr>
-            <th>Nombre</th>
+        <th>Nombre</th>    
+        <th>Nombre</th>
         <th>Descripción</th>
         <th>Docente</th>
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
         <th>Precio</th>
         
-        <th>estado</th>
         
         @can('activities.destroy')<th colspan="3">Acciones</th>@endcan
         </tr>
@@ -17,14 +17,14 @@
         <tbody>
         @foreach($workshops_user as $workshop)
             <tr>
-                <td>{{ $workshop->name_workshop }}</td>
+            <td>{{ $workshop->name_categorie }}</td>    
+            <td>{{ $workshop->name_workshop }}</td>
             <td>{{ $workshop->description_workshop }}</td>
             <td>{{ $workshop->teacher}}</td>
             <td>{{ $workshop->start }}</td>
             <td>{{ $workshop->end }}</td>
-            <td>{{ $workshop->price }}</td>
+            <td>${{ $workshop->price }}</td>
             
-            <td>{{ $workshop->state }}</td>
             
             @can('activities.destroy')<td width="120">
                     {!! Form::open(['route' => ['workshops.destroy', $workshop->id], 'method' => 'delete']) !!}
