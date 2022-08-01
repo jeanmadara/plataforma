@@ -48,13 +48,16 @@ class WorkshopController extends AppBaseController
 
         $name_categorie  = $request->get('name_categorie');
         $teacher = $request->get('teacher');
-        $biblio   = $request->get('name_workshop');
+        $name_workshop   = $request->get('name_workshop');
 
             $workshops_user = Workshop::orderBy('name_workshop', 'DESC')
             ->join('categories as c', 'c.id', '=', 'categorie_id')
-            ->necesidad($name_categorie)
-            ->fcv($teacher)
-            ->bibliografia($teacher)
+            ->join('user_workshop as uw', 'workshops.id', '=', 'uw.workshop_id')
+            ->join('users as us', 'us.id', '=', 'uw.user_id')
+            ->join('profiles', 'profiles.user_id', '=', 'us.id')
+            ->tipo_actividad($name_categorie)
+            ->teacher($teacher)
+            ->name($name_workshop)
             ->paginate(8);    
 
             
@@ -83,10 +86,11 @@ class WorkshopController extends AppBaseController
         ->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
         ->join('users as us', 'us.id', '=', 'uw.user_id')
         ->join('profiles as p', 'p.user_id', '=', 'us.id')
-        ->join('categories as c', 'c.id', '=', 'w.categorie_id')
+        //->join('categories as c', 'c.id', '=', 'w.categorie_id')
         ->where('uw.user_id',$user)
         ->where('w.categorie_id', 1)
-        ->select( 'w.*', 'name_categorie', 'state')->get();
+        ->select( 'w.*', 'state')
+        ->get();
 
         return view('workshops.index')
             ->with('workshops_user', $workshops_user);

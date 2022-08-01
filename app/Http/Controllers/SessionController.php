@@ -41,8 +41,10 @@ class SessionController extends AppBaseController
     public function sessionlist($id)
     {
         $workshop_id = $id;
-        $sessions = DB::table('sessions')
+        $sessions = DB::table('sessions as s')
+        ->join('workshops as w', 'w.id', '=', 's.workshop_id')
         ->where('workshop_id', $workshop_id)
+        ->select( 's.*', 'name_workshop')
         ->get();
 
         return view('sessions.index_view')->with('sessions', $sessions);
@@ -65,6 +67,7 @@ class SessionController extends AppBaseController
         ->join('users as us', 'us.id', '=', 'uw.user_id')
         ->where('uw.user_id',$user)
         ->where('w.categorie_id', 1)
+        ->select( 'w.*', 'state','uw.workshop_id')
         ->get();
 
         return view('sessions.index')

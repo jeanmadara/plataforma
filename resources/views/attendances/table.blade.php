@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table" id="sessions-table">
+    <table class="table" id="attendances-table">
         <thead>
         <tr>
             <th>Nombre del Curso</th>
@@ -7,28 +7,18 @@
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
         <th>Precio</th>
-        @can('activities.create')<th>añadir sesion</th>@endcan
-        <th>ver sesiones</th>
         
-       
+    
         </tr>
         </thead>
         <tbody>
         @foreach($workshops as $workshop)
             <tr>
-                <td>{{ $workshop->name_workshop }}</td>
+            <td>{{ $workshop->name_workshop }}</td>
             <td>{{ $workshop->description_workshop }}</td>
             <td>{{ $workshop->start }}</td>
             <td>{{ $workshop->end }}</td>
             <td>${{ $workshop->price }}</td>
-            @can('activities.create')<td>    
-                <a class="btn btn-info" href="{{ route('addsessions', [$workshop->workshop_id]) }}">añadir sesion</a>
-            </td>@endcan
-                
-            <td>
-                <a class="btn btn-info" href="{{ route('sessionlist', [$workshop->workshop_id]) }}">Ver sesiones</a>
-            </td>
-           
             </tr>
         @endforeach
         </tbody>

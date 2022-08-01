@@ -2,8 +2,8 @@
     <table class="table" id="workshops-table">
         <thead>
         <tr>
-        <th>Nombre</th>    
-        <th>Nombre</th>
+        <th>tipo de actividad</th>    
+        <th>Nombre de la actividad</th>
         <th>Descripción</th>
         <th>Docente</th>
         <th>Fecha Inicio</th>
@@ -20,7 +20,7 @@
             <td>{{ $workshop->name_categorie }}</td>    
             <td>{{ $workshop->name_workshop }}</td>
             <td>{{ $workshop->description_workshop }}</td>
-            <td>{{ $workshop->teacher}}</td>
+            <td>{{ $workshop->full_name}}</td>
             <td>{{ $workshop->start }}</td>
             <td>{{ $workshop->end }}</td>
             <td>${{ $workshop->price }}</td>

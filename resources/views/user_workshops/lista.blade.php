@@ -17,7 +17,7 @@
                 <div class="col-sm-6">
                     <h5>Busqueda Avanzada</h5>
                 </div>
-                        {{ Form::open(['route' => 'boletines', 'method' => 'GET', 'class' => 'form-inline pull-right']) }}
+                        {{ Form::open(['route' => 'reportes', 'method' => 'GET', 'class' => 'form-inline pull-right']) }}
                             <div class="form-group">
                                 
                                 {!! Form::select('name_categorie', $categorie, null, ['class' => 'form-control','placeholder' => 'tipo de actividad']) !!}  

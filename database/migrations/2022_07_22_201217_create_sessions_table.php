@@ -18,7 +18,7 @@ class CreateSessionsTable extends Migration
             $table->id('id');
             $table->string('name');
             $table->string('description_session');
-            $table->string('reference')->default('Sin Link');
+            $table->string('reference')->nullable();
             $table->datetime('start');
             $table->datetime('end');
             $table->unsignedBigInteger('workshop_id')->unsigned();

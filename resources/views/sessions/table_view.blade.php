@@ -5,10 +5,11 @@
             <th>Name</th>
             <th>Descripción</th>
             <th>Link de Referencia</th>
-        <th>Start</th>
+        <th>Fecha</th>
         <th>End</th>
-        <th>Workshop Id</th>
-            <th colspan="3">Action</th>
+        <th>Curso</th>
+        <th>Asistencia</th>
+        @can('activities.create')<th colspan="3">Action</th>@endcan
         </tr>
         </thead>
         <tbody>
@@ -20,8 +21,11 @@
                 <td><a href="{!! $session->reference !!}"target="_blank">{{ $session->reference }}</a></td>
             <td>{{ $session->start }}</td>
             <td>{{ $session->end }}</td>
-            <td>{{ $session->workshop_id }}</td>
-                <td width="120">
+            <td>{{ $session->name_workshop }}</td>
+            <td>
+                    <a class="btn btn-info" href="{{ route('attendances.show', [$session->id]) }}">Ver Asistencia</a>
+            </td>
+            @can('activities.create')<td width="120">
                     {!! Form::open(['route' => ['sessions.destroy', $session->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
                         <a href="{{ route('sessions.show', [$session->id]) }}"
@@ -35,7 +39,7 @@
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                     </div>
                     {!! Form::close() !!}
-                </td>
+                </td>@endcan
             </tr>
         @endforeach
         </tbody>

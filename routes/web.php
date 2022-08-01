@@ -47,7 +47,7 @@ Route::resource('actcheckins', App\Http\Controllers\ActcheckinController::class)
 
 Route::resource('userWorkshops', App\Http\Controllers\user_workshopController::class);
 
-Route::get('boletines', [App\Http\Controllers\WorkshopController::class,'lista'])->name('boletines');
+Route::get('reportes', [App\Http\Controllers\WorkshopController::class,'lista'])->name('reportes');
 
 
 Route::resource('sessions', App\Http\Controllers\SessionController::class);
@@ -55,3 +55,6 @@ Route::resource('sessions', App\Http\Controllers\SessionController::class);
 Route::get('/addsessions/{id}', [App\Http\Controllers\SessionController::class,'addsession'])->name('addsessions');
 Route::get('/sessionlist/{id}', [App\Http\Controllers\SessionController::class,'sessionlist'])->name('sessionlist');
 
+
+
+Route::resource('attendances', App\Http\Controllers\AttendanceController::class);

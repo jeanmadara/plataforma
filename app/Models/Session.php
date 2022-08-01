@@ -65,5 +65,7 @@ class Session extends Model
         'workshop_id' => 'required'
     ];
 
-    
+    public function users(){
+        return $this->belongsToMany('App\Models\User','session_user','session_id','user_id')->withTimestamps();
+    } 
 }

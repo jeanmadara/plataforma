@@ -76,21 +76,24 @@ class Workshop extends Model
     
     //Query Scope
 
-    public function scopeNecesidad($query, $name_categorie)
+    public function scopeTipo_actividad($query, $name_categorie)
     {
         if($name_categorie)
             return $query->where('categorie_id', 'LIKE', "%$name_categorie%");
             //->join('necesidads', 'fuente_necesidads.necesidad_id', '=', 'necesidads.id');
     }
 
-    public function scopeFcv($query, $teacher)
+    public function scopeTeacher($query, $teacher)
     {
         if($teacher)
-            return $query->where('teacher', 'LIKE', "%$teacher%");
+            return $query->where('Full_name', 'LIKE', "%$teacher%")
+            ->join('user_workshop', 'workshops.id', '=', 'user_workshop.workshop_id')
+            ->join('users', 'users.id', '=', 'user_workshop.user_id')
+           ;
             //->join('necesidads', 'fuente_necesidads.necesidad_id', '=', 'necesidads.id');
     }
 
-    public function scopeBibliografia($query, $name_workshop)
+    public function scopeName($query, $name_workshop)
     {
         if($name_workshop)
             return $query->where('name_workshop', 'LIKE', "%$name_workshop%");

@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function workshops(){
         return $this->belongsToMany('App\Models\Workshop','user_workshop','user_id','workshop_id')->withTimestamps();
     } 
+
+    public function sessions(){
+        return $this->belongsToMany('App\Models\Session','session_user','user_id','sessions_id')->withTimestamps();
+    } 
 }
