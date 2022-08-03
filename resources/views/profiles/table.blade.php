@@ -6,7 +6,7 @@
         <th>Cédula o Pasaporte</th>
         <th>Teléfono</th>
         <th>Descripción</th>
-        <th>User Id</th>
+       
             <th colspan="3">Acción</th>
         </tr>
         </thead>
@@ -18,7 +18,7 @@
             <td>{{ $profile->dni }}</td>
             <td>{{ $profile->phone }}</td>
             <td>{{ $profile->description }}</td>
-            <td>{{ $profile->user_id }}</td>
+            
                 <td width="120">
                     {!! Form::open(['route' => ['profiles.destroy', $profile->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

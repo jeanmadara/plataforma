@@ -20,7 +20,7 @@
             <td>{{ $workshop->name_categorie }}</td>    
             <td>{{ $workshop->name_workshop }}</td>
             <td>{{ $workshop->description_workshop }}</td>
-            <td>{{ $workshop->full_name}}</td>
+            <td>{{ $workshop->teacher}}</td>
             <td>{{ $workshop->start }}</td>
             <td>{{ $workshop->end }}</td>
             <td>${{ $workshop->price }}</td>

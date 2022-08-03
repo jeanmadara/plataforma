@@ -51,10 +51,11 @@ class WorkshopController extends AppBaseController
         $name_workshop   = $request->get('name_workshop');
 
             $workshops_user = Workshop::orderBy('name_workshop', 'DESC')
+            ->distinct()
             ->join('categories as c', 'c.id', '=', 'categorie_id')
-            ->join('user_workshop as uw', 'workshops.id', '=', 'uw.workshop_id')
-            ->join('users as us', 'us.id', '=', 'uw.user_id')
-            ->join('profiles', 'profiles.user_id', '=', 'us.id')
+            //->join('user_workshop as uw', 'workshops.id', '=', 'uw.workshop_id')
+            //->join('users as us', 'us.id', '=', 'uw.user_id')
+            //->join('profiles', 'profiles.user_id', '=', 'us.id')
             ->tipo_actividad($name_categorie)
             ->teacher($teacher)
             ->name($name_workshop)

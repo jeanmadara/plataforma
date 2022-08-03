@@ -7,8 +7,8 @@
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
         <th>Precio</th>
-        
-        <th>Docente</th>
+        @can('student.index')
+        <th>Docente</th>@endcan
         @can('workshops.create')<th colspan="3">Acciones</th>@endcan
         </tr>
         </thead>
@@ -20,8 +20,8 @@
             <td>{{ $workshop->start }}</td>
             <td>{{ $workshop->end }}</td>
             <td>${{ $workshop->price }}</td>
-            
-            <td>{{ $workshop->teacher}}</td>
+            @can('student.index')
+            <td>{{ $workshop->teacher}}</td>@endcan
             @can('workshops.create')<td width="120">
                     {!! Form::open(['route' => ['workshops.destroy', $workshop->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
