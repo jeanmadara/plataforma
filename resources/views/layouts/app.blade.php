@@ -156,7 +156,7 @@
         $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
 </script>
-<script src="{{ asset ('/js/calendar.js')}}" defer ></script>
+<!-- <script src="{{ asset ('/js/calendar.js')}}" defer ></script> -->
 
 
 
