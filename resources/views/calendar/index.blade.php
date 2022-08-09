@@ -4,6 +4,7 @@
 
 <div class="container">
     <div id="calendar"></div>
+    </div>
     
     <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#session">
@@ -158,7 +159,7 @@
   </div>
 </div>
 
-</div>
+
 
 
 
