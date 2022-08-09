@@ -34,6 +34,10 @@
           integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw=="
           crossorigin="anonymous"/>
 
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.css">
+          <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/locales-all.js"></script>
+
     @stack('third_party_stylesheets')
 
     @stack('page_css')
@@ -152,6 +156,9 @@
         $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
 </script>
+<script src="{{ asset ('js/calendar.js')}}" defer ></script>
+
+
 
 @stack('third_party_scripts')
 

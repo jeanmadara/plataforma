@@ -155,6 +155,14 @@
     </a>
 </li>
 @endcan
+
+<li class="nav-item">
+    <a href="{{ route('calendar') }}"
+       class="nav-link {{ Request::is('calendar*') ? 'active' : '' }}">
+        <p>Agenda</p>
+    </a>
+</li>
+
 <li class="nav-item">
     <a href="{{ route('profiles.index') }}"
        class="nav-link {{ Request::is('profiles*') ? 'active' : '' }}">
