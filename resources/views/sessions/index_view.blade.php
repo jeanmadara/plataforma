@@ -7,12 +7,7 @@
                 <div class="col-sm-6">
                     <h1>Sessions</h1>
                 </div>
-                <div class="col-sm-6">
-                    <a class="btn btn-primary float-right"
-                       href="{{ route('sessions.index') }}">
-                        Volver
-                    </a>
-                </div>
+                
             </div>
         </div>
     </section>

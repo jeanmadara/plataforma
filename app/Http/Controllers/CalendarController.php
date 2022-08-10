@@ -19,10 +19,26 @@ class CalendarController extends Controller
 
     public function get_session()
     {
-        $events=Session::select("id", "name as title","start as start","end as end","description_session as ds","reference")
-        ->get()->toArray();
+        //$events=Session::select("id", "name as title","start as start","end as end","description_session as ds","reference")
+        //->get()->toArray();
         //echo json_encode($events);
         //dd($events);
+        $user = auth()->id();
+
+        /* $events=Session::join('workshop as w', 'sessions.workshop_id', '=', 'w.id')
+        ->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
+        ->select("sessions.id as id", "sessions.name as title","sessions.start as start","sessions.end as end","sessions.description_session as ds","reference")
+        ->where('uw.user_id',$user)
+        ->get()->toArray(); */
+
+        $events = DB::table('sessions')->distinct()
+        //->join('workshop as w', 'sessions.workshop_id', '=', 'w.id')
+        //->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
+        //->join('categories as c', 'c.id', '=', 'w.categorie_id')
+        //->where('uw.user_id',$user)
+        //->where('w.categorie_id', 1)
+        ->select("sessions.id as id", "sessions.name as title","sessions.start as start","sessions.end as end","sessions.description_session as ds","reference")
+        ->get()->toArray();
 
         return response()->json($events);
 

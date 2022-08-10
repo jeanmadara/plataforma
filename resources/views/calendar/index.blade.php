@@ -99,10 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
     <div id="calendar"></div>
     </div>
     
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#session">
-  Launch demo modal
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="session" tabindex="-1" role="dialog" aria-labelledby="sessionLabel" aria-hidden="true">
@@ -194,37 +190,37 @@ document.addEventListener('DOMContentLoaded', function() {
       <form action="/calendar/edit">
         {!! csrf_field() !!}
 
-        <div class="form-group col-sm-12">
+    <div class="form-group col-sm-12">
     {!! Form::label('workshop_id', 'Seleccione el Curso:') !!}
     {!! Form::select('workshop_id', $workshop_id, null, ['class' => 'form-control custom-select']) !!}
-</div>
+    </div>
 
 
-<input type="hidden" name="id" id="editid">
-      <div class="form-goup">
+    <input type="hidden" name="id" id="editid">
+      <div class="form-group col-sm-12">
        <label for="name">nombre de la sesión</label>
       <input type="text" class="form-control" name="name" id="editname" aria-describedby="helpId">
       <small id="helpId" class="form-text text-muted">usar formato</small>
       </div>
 
-      <div class="form-goup">
+      <div class="form-group col-sm-12">
       <label for="description_session">Descripcion</label>
       <input type="textarea" class="form-control" name="description_session" id="editdescription_session" aria-describedby="helpId">
      
       </div>
 
-      <div class="form-goup">
+      <div class="form-group col-sm-12">
       <label for="reference">Link de referencia</label>
-      <input type="text" class="form-control" name="reference" id="editreference" aria-describedby="helpId" placeholder="hhhh">
+      <input type="text" class="form-control" name="reference" id="editreference" aria-describedby="helpId" placeholder="Link de referencia para la sesión">
   
       </div>
 
-      <div class="form-goup">
+      <div class="form-group col-sm-12">
        <label for="start">fecha</label>
       <input type="text" readonly class="form-control" name="start" id="editstart" aria-describedby="helpId">
      
       </div>
-      <div class="col-md4">
+      <div class="form-group col-sm-4">
                 <label>hora Inicio</label>
                 <input type="time" name="hora_inicio" id="edithora_inicio" class="form-control">
             </div>
@@ -235,15 +231,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
       </div>
 
-      <div class="col-md4">
-                <label>hora Inicio</label>
+      <div class="form-group col-sm-4">
+                <label>hora Fin</label>
                 <input type="time" name="hora_fin" id="edithora_fin" class="form-control">
             </div>
       
       </div>
       <div class="modal-footer">
-      <button type="submit" class="btn btn-primary" id="btnupdate">Guardar</button>
-      <button type="button" class="btn btn-warning" id="btnupdssate">Modificar</button>  
+      <button type="submit" class="btn btn-primary" id="btnupdate">Modificar</button>
       <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cerrar">Cancelar</button>
         
       </div>

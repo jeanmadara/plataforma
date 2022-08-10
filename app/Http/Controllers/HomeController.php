@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user_id = auth()->id();
+        $workshop_id = DB::table('workshops as w')
+        //->distinct()
+        ->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
+        ->where('categorie_id', 1)
+        ->where('user_id', $user_id)
+        ->pluck('name_workshop','w.id');
+
+        return view('home',compact('workshop_id'));
     }
 }

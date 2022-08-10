@@ -73,6 +73,10 @@ class Workshop extends Model
         return $this->belongsToMany('App\Models\User','user_workshop','workshop_id','user_id')
         ->withPivot('state','user_id');
     } 
+
+    public function sessions(){
+        return $this->hasMany('App\Models\Session');
+    }
     
     //Query Scope
 

@@ -68,4 +68,8 @@ class Session extends Model
     public function users(){
         return $this->belongsToMany('App\Models\User','session_user','session_id','user_id')->withTimestamps();
     } 
+
+    public function workshops(){
+        return $this->hasOne('App\Models\Workshop','id');
+    }
 }

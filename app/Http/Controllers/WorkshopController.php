@@ -39,10 +39,7 @@ class WorkshopController extends AppBaseController
     public function lista(Request $request)
     {
         
-        /*$nece = Necesidad::
-        join('investigacion_necesidad  as in', 'in.necesidad_id', '=', 'necesidads.id')
-        ->where('investigacion_id',$id)
-        ->pluck('nombre','nombre');categories*/
+
         $categorie = Categorie::pluck('name_categorie','id');
         
 
@@ -60,11 +57,6 @@ class WorkshopController extends AppBaseController
             ->teacher($teacher)
             ->name($name_workshop)
             ->paginate(8);    
-
-            
-
-
-        
 
         return view('user_workshops.lista',compact('categorie'))
         ->with('workshops_user', $workshops_user);

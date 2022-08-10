@@ -60,6 +60,6 @@ Route::get('/sessionlist/{id}', [App\Http\Controllers\SessionController::class,'
 Route::resource('attendances', App\Http\Controllers\AttendanceController::class);
 
 Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'index'])->name('calendar');
-Route::get('/eventos/get', [App\Http\Controllers\CalendarController::class, 'get_session'])->name('eventos');
+Route::get('/eventos/get', [App\Http\Controllers\CalendarController::class, 'get_session']);
 Route::get('/calendar/create', [App\Http\Controllers\CalendarController::class, 'create_session']);
 Route::get('/calendar/edit', [App\Http\Controllers\CalendarController::class, 'ajaxupdate']);

@@ -8,7 +8,7 @@
         <th>Fecha</th>
         <th>End</th>
         <th>Curso</th>
-        <th>Asistencia</th>
+        @can('activities.create')<th>Asistencia</th>@endcan
         @can('activities.create')<th colspan="3">Action</th>@endcan
         </tr>
         </thead>
@@ -22,9 +22,9 @@
             <td>{{ $session->start }}</td>
             <td>{{ $session->end }}</td>
             <td>{{ $session->name_workshop }}</td>
-            <td>
+            @can('activities.create')<td>
                     <a class="btn btn-info" href="{{ route('attendances.show', [$session->id]) }}">Ver Asistencia</a>
-            </td>
+            </td>@endcan
             @can('activities.create')<td width="120">
                     {!! Form::open(['route' => ['sessions.destroy', $session->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
