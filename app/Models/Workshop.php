@@ -90,9 +90,9 @@ class Workshop extends Model
     public function scopeTeacher($query, $teacher)
     {
         if($teacher)
-            return $query->where('Full_name', 'LIKE', "%$teacher%")
-            ->join('user_workshop', 'workshops.id', '=', 'user_workshop.workshop_id')
-            ->join('users', 'users.id', '=', 'user_workshop.user_id')
+            return $query->where('us.name', 'LIKE', "%$teacher%")
+            //->join('user_workshop', 'workshops.id', '=', 'user_workshop.workshop_id')
+            //->join('users', 'users.id', '=', 'user_workshop.user_id')
            ;
             //->join('necesidads', 'fuente_necesidads.necesidad_id', '=', 'necesidads.id');
     }

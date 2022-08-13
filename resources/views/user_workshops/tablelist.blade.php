@@ -2,13 +2,16 @@
     <table class="table" id="workshops-table">
         <thead>
         <tr>
-        <th>tipo de actividad</th>    
-        <th>Nombre de la actividad</th>
+        <th>Usuario</th>
+          
+        <th>Actividad</th>
+        <th>tipo de actividad</th>  
         <th>Descripción</th>
         <th>Docente</th>
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
         <th>Precio</th>
+        
         
         
         @can('activities.destroy')<th colspan="3">Acciones</th>@endcan
@@ -17,13 +20,16 @@
         <tbody>
         @foreach($workshops_user as $workshop)
             <tr>
-            <td>{{ $workshop->name_categorie }}</td>    
+            <td>{{ $workshop->name }}</td>
+               
             <td>{{ $workshop->name_workshop }}</td>
+            <td>{{ $workshop->name_categorie }}</td> 
             <td>{{ $workshop->description_workshop }}</td>
             <td>{{ $workshop->teacher}}</td>
             <td>{{ $workshop->start }}</td>
             <td>{{ $workshop->end }}</td>
             <td>${{ $workshop->price }}</td>
+            
             
             
             @can('activities.destroy')<td width="120">
@@ -46,3 +52,7 @@
         </tbody>
     </table>
 </div>
+ <!-- Centramos la paginacion a la derecha -->
+ <div class="pagination justify-content-end">
+                            {!! $workshops_user->links() !!}
+                          </div>     

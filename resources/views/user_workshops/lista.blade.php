@@ -24,7 +24,7 @@
                             </div>
                             
                             <div class="form-group">
-                                {{ Form::text('teacher', null, ['class' => 'form-control', 'placeholder' => 'Docente']) }}
+                                {{ Form::text('teacher', null, ['class' => 'form-control', 'placeholder' => 'Username']) }}
                             </div>
                             <div class="form-group">
                                 {{ Form::text('name_workshop', null, ['class' => 'form-control', 'placeholder' => 'Nombre de actividad']) }}

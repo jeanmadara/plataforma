@@ -8,7 +8,7 @@
                     <h1>Control de Asistencias</h1>
                 </div>
                 <div class="col-sm-6">
-                @can('workshops.create')<a class="btn btn-primary float-right"
+                @can('admin.index')<a class="btn btn-primary float-right"
                        href="{{ route('attendances.create') }}">
                         Registrar Asistencia 
                     </a> @endcan 

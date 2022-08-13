@@ -58,6 +58,7 @@ Route::get('/sessionlist/{id}', [App\Http\Controllers\SessionController::class,'
 
 
 Route::resource('attendances', App\Http\Controllers\AttendanceController::class);
+Route::get('/addattendances/{id}/{workshop_id}', [App\Http\Controllers\AttendanceController::class,'addattendance'])->name('addattendances');
 
 Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'index'])->name('calendar');
 Route::get('/eventos/get', [App\Http\Controllers\CalendarController::class, 'get_session']);

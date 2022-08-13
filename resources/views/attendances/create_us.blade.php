@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Perfil de Usuario</h1>
+                    <h1>Registro de Asistencia</h1>
                 </div>
             </div>
         </div>
@@ -17,24 +17,23 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'profiles.store']) !!}
+            {!! Form::open(['route' => 'attendances.store']) !!}
 
             <div class="card-body">
 
                 <div class="row">
-                    @include('profiles.fields')
+                    @include('attendances.fields_us')
                 </div>
 
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Guardar', ['class' => 'btn btn-primary', 'onclick' => 'return check_Cedula(form)']) !!}
-                <a href="{{ route('profiles.index') }}" class="btn btn-default">Cancelar</a>
+                {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('sessions.index') }}" class="btn btn-default">Cancelar</a>
             </div>
 
             {!! Form::close() !!}
 
         </div>
     </div>
-    
 @endsection

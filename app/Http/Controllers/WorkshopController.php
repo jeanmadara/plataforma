@@ -45,18 +45,21 @@ class WorkshopController extends AppBaseController
 
         $name_categorie  = $request->get('name_categorie');
         $teacher = $request->get('teacher');
-        $name_workshop   = $request->get('name_workshop');
+        $name_workshop   = $request->get('name_workshop'); 
 
-            $workshops_user = Workshop::orderBy('name_workshop', 'DESC')
-            ->distinct()
+            $workshops_user = Workshop::orderBy('name', 'DESC')
+            //->distinct()
             ->join('categories as c', 'c.id', '=', 'categorie_id')
-            //->join('user_workshop as uw', 'workshops.id', '=', 'uw.workshop_id')
-            //->join('users as us', 'us.id', '=', 'uw.user_id')
+            ->join('user_workshop as uw', 'workshops.id', '=', 'uw.workshop_id')
+            ->join('users as us', 'us.id', '=', 'uw.user_id')
             //->join('profiles', 'profiles.user_id', '=', 'us.id')
             ->tipo_actividad($name_categorie)
             ->teacher($teacher)
             ->name($name_workshop)
-            ->paginate(8);    
+            ->paginate(5);
+            //->get();    
+
+            //dd($workshops_user);
 
         return view('user_workshops.lista',compact('categorie'))
         ->with('workshops_user', $workshops_user);

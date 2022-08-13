@@ -59,7 +59,7 @@ class Profile extends Model
     public static $rules = [
         'full_name' => 'required',
         'dni' => 'required',
-        'phone' => 'required',
+        'phone' => 'numeric',
         'user_id' => 'required'
     ];
 

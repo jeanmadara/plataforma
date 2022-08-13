@@ -31,6 +31,23 @@ class AttendanceController extends AppBaseController
      *
      * @return Response
      */
+
+    public function addattendance($id,$workshop_id)
+    {
+        
+        $session_id = $id;
+        $workshop_id = $workshop_id;
+        $user_id = auth()->id();
+        $profiles = Profile::orderBy('full_name', 'DESC')
+        ->join('users as us', 'us.id', '=', 'profiles.user_id')
+        ->join('user_workshop as uw', 'us.id', '=', 'uw.user_id')
+        //->join('categories as c', 'c.id', '=', 'w.categorie_id')
+        ->where('uw.workshop_id',$workshop_id)->get();
+
+        return view('attendances.create_us',compact('profiles'),compact('session_id'),compact('user_id'));
+
+    } 
+
     public function index(Request $request)
     {
         $user = auth()->id();

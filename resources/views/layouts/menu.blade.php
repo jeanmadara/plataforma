@@ -101,12 +101,20 @@
     </a>
     </li> 
     @endcan 
-    <li class="nav-item">
+    @can('activities.create')<li class="nav-item">
     <a href="{{ route('sessions.index') }}"
        class="nav-link {{ Request::is('sessions*') ? 'active' : '' }}">
         <p>Sesiones</p>
     </a>
-    </li>
+    </li>@endcan
+    @can('activities.create')
+<li class="nav-item">
+    <a href="{{ route('attendances.index') }}"
+       class="nav-link {{ Request::is('attendances*') ? 'active' : '' }}">
+        <p>Control de Asistencia</p>
+    </a>
+</li>
+@endcan
 </div>
 @endcan 
 
@@ -139,14 +147,7 @@
     </li> @endcan
 </div>
 @endcan
-@can('activities.create')
-<li class="nav-item">
-    <a href="{{ route('attendances.index') }}"
-       class="nav-link {{ Request::is('attendances*') ? 'active' : '' }}">
-        <p>Control de Asistencia</p>
-    </a>
-</li>
-@endcan
+
 @can('activities.create')
 <li class="nav-item">
     <a href="{{ route('reportes') }}"

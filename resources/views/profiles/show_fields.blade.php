@@ -21,3 +21,4 @@
     {!! Form::label('description', 'Description:') !!}
     <p>{{ $profile->description }}</p>
 </div>
+

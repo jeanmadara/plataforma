@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,listWeek'},
         events: evt,
-        
+        @can('activities.create')
         dateClick: function(info) {
           //alert('Clicked on: ' + info.dateStr);
           $("#start").val(info.dateStr);
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
             //$("#star").val(date.format());
             //$("#session").modal("show");
           },
-          
+          @endcan
           eventClick: function(info) {
             //alert('Resource ID: ' + info.event.end);
                $evento = calendar.getEventById( info.event.id );
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       </div>
       <div class="modal-footer">
-      <button type="submit" class="btn btn-primary" id="btnupdate">Modificar</button>
+      @can('activities.create')<button type="submit" class="btn btn-primary" id="btnupdate">Modificar</button>@endcan
       <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cerrar">Cancelar</button>
         
       </div>
