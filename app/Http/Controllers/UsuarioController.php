@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 
+use App\Models\Profile;
+
 class UsuarioController extends Controller
 {
     public function __construct()
@@ -71,8 +73,25 @@ class UsuarioController extends Controller
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
     
-        $user = User::create($input);
-        $user->assignRole($request->input('roles'));
+        //$user = User::create($input);
+       //dd($input);
+        
+        $user =User::create([
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']),
+            'user_role' => $input['roles']]);
+
+            $user->assignRole($request->input('roles'));
+
+
+        Profile::create([
+            'id' => $user->id,
+            'full_name' => $input['full_name'],
+            'dni' => "",
+            'phone' => "",
+            'description' => "",
+            'user_id' => $user->id]);
     
         return redirect()->route('usuarios.index');
     }
@@ -126,6 +145,10 @@ class UsuarioController extends Controller
         }else{
             $input = Arr::except($input,array('password'));    
         }
+
+        $input['user_role'] = $input['roles'];
+
+        //dd($input);
     
         $user = User::find($id);
         $user->update($input);
