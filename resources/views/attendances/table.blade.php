@@ -17,8 +17,8 @@
             <tr>
                 <td>{{ $workshop->name_workshop }}</td>
             <td>{{ $workshop->description_workshop }}</td>
-            <td>{{ $workshop->start }}</td>
-            <td>{{ $workshop->end }}</td>
+            <td>{{ date('d/m/Y', strtotime($workshop->start)) }}</td>
+            <td>{{ date('d/m/Y', strtotime($workshop->end)) }}</td>
             <td>${{ $workshop->price }}</td>
                 
             <td>

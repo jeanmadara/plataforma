@@ -6,11 +6,12 @@
             <th>Descripción</th>
             <th>Link de Referencia</th>
         <th>Fecha</th>
-        <th>End</th>
+        <th>Inicio</th>
+        <th>Fin</th>
         <th>Curso</th>
-        @can('activities.create')<th>Asistencia</th>@endcan
-        @can('activities.create')<th>Asistencia</th>@endcan
-        @can('activities.create')<th colspan="3">Action</th>@endcan
+        @can('activities.create')<th>Acción</th>@endcan
+        @can('activities.create')<th>Acción</th>@endcan
+        @can('activities.create')<th colspan="3">Más</th>@endcan
         </tr>
         </thead>
         <tbody>
@@ -20,14 +21,15 @@
                 <td>{{ $session->description_session }}</td>
                 
                 <td><a href="{!! $session->reference !!}"target="_blank">{{ $session->reference }}</a></td>
-            <td>{{ $session->start }}</td>
-            <td>{{ $session->end }}</td>
+            <td>{{ date('d/m/Y', strtotime($session->start)) }}</td>
+            <td>{!! date('H:i', strtotime($session->start)) !!}</td>
+            <td>{!! date('H:i', strtotime($session->end)) !!}</td>
             <td>{{ $session->name_workshop }}</td>
             @can('activities.create')<td>
-                    <a class="btn btn-info" href="{{ route('addattendances', [$session->id, $session->workshop_id]) }}">Registrar Asistencia</a>
+                    <a class="btn btn-info btn-sm " href="{{ route('addattendances', [$session->id, $session->workshop_id]) }}">Registrar Asistencia</a>
             </td>@endcan
             @can('activities.create')<td>
-                    <a class="btn btn-info" href="{{ route('attendances.show', [$session->id]) }}">Ver Asistencia</a>
+                    <a class="btn btn-info btn-sm " href="{{ route('attendances.show', [$session->id]) }}">Ver Asistencia</a>
             </td>@endcan
             @can('activities.create')<td width="120">
                     {!! Form::open(['route' => ['sessions.destroy', $session->id], 'method' => 'delete']) !!}

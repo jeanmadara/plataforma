@@ -56,6 +56,7 @@ class WorkshopController extends AppBaseController
             ->tipo_actividad($name_categorie)
             ->teacher($teacher)
             ->name($name_workshop)
+            ->where('us.user_role', 'estudiante')
             ->paginate(5);
             //->get();    
 

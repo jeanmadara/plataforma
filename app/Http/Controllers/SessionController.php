@@ -31,6 +31,20 @@ class SessionController extends AppBaseController
      *
      * @return Response
      */
+    public function validatedate($w, $w_start, $w_end)
+    {
+        $workshop_date = DB::table('sessions')->distinct()
+        
+        ->join('workshops as w', 'sessions.workshop_id', '=', 'w.id')
+        ->select("w.id", "w.start", "w.end")
+        ->where('w.id',$w)
+        ->whereDate('w.start','<=',$w_start)
+        ->whereDate('w.end','>=',$w_end)
+        ->first();
+        //dd($workshop_date);
+        return $workshop_date == null ? true : false;
+    }
+
     public function addsession($id)
     {
         
@@ -104,11 +118,23 @@ class SessionController extends AppBaseController
     {
         $input = $request->all();
 
-        $session = $this->sessionRepository->create($input);
+        if($this-> validatedate($input["workshop_id"], $input["start"], $input["end"])){
 
-        Flash::success('Session saved successfully.');
+            Flash::error('Las Fechas no coinciden');
+            return redirect(route('sessions.index'));
+           
+        }else{
+            
+            $session = $this->sessionRepository->create($input);
 
-        return redirect(route('sessions.index'));
+            Flash::success('Session saved successfully.');
+    
+            return redirect(route('sessions.index'));
+
+            
+        }
+
+       
     }
 
     /**

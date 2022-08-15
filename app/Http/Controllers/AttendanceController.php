@@ -41,8 +41,9 @@ class AttendanceController extends AppBaseController
         $profiles = Profile::orderBy('full_name', 'DESC')
         ->join('users as us', 'us.id', '=', 'profiles.user_id')
         ->join('user_workshop as uw', 'us.id', '=', 'uw.user_id')
-        //->join('categories as c', 'c.id', '=', 'w.categorie_id')
-        ->where('uw.workshop_id',$workshop_id)->get();
+        //->join('workshops as w', 'w.id', '=', 'uw.workshop_id')
+        ->where('uw.workshop_id',$workshop_id)
+        ->where('us.user_role', 'estudiante')->get();
 
         return view('attendances.create_us',compact('profiles'),compact('session_id'),compact('user_id'));
 

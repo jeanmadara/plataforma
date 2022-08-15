@@ -2,20 +2,25 @@
 
 @section('content')
 
+<div class="content px-3">
+
+        @include('flash::message')
+        </div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     /* let formulario = document.querySelector("form"); 
     var evt=[]; */
-    $.ajax({
+   /*  $.ajax({
         url:'/eventos/get',
         type:"GET",
         dataType: "JSON",
-        async:false,
+        //async:false,
 
     }).done(function(r){
         evt=r;
         //console.log(evt);
-    })
+    }) */
 
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -25,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,listWeek'},
-        events: evt,
+        events: '/eventos/get',
         @can('activities.create')
         dateClick: function(info) {
           //alert('Clicked on: ' + info.dateStr);
@@ -43,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
                //console.log(info.event);
                //$('#id').val(info.event.id);
                $('#editid').val(info.event.id);
+               //$('#editworkshop_id').val(info.event.extendedProps.workshop_id);
                $('#editname').val(info.event.title);
                //$('#editasunto').val(info.event.extendedProps.asunto);
                $('#editdescription_session').val(info.event.extendedProps.ds);
@@ -116,8 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
         {!! csrf_field() !!}
 
       <div class="form-group col-sm-12">
-      {!! Form::label('workshop_id', 'Seleccione el Curso:') !!}
-      {!! Form::select('workshop_id', $workshop_id, null, ['class' => 'form-control custom-select']) !!}
+      {!! Form::label('workshop_id', 'Curso:') !!}
+      {!! Form::select('workshop_id', $workshop_id, null, ['class' => 'form-control custom-select', 'placeholder' => 'seleccione el curso']) !!}
       </div> 
 
       <div class="form-group col-sm-12">
@@ -191,8 +197,8 @@ document.addEventListener('DOMContentLoaded', function() {
         {!! csrf_field() !!}
 
     <div class="form-group col-sm-12">
-    {!! Form::label('workshop_id', 'Seleccione el Curso:') !!}
-    {!! Form::select('workshop_id', $workshop_id, null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::label('workshop_id', 'Curso:') !!}
+    {!! Form::select('workshop_id', $workshop_id, null, ['class' => 'form-control custom-select','placeholder' => 'seleccione el curso']) !!}
     </div>
 
 

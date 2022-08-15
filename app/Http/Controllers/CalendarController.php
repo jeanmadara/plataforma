@@ -19,42 +19,76 @@ class CalendarController extends Controller
 
     public function get_session()
     {
-        //$events=Session::select("id", "name as title","start as start","end as end","description_session as ds","reference")
-        //->get()->toArray();
-        //echo json_encode($events);
-        //dd($events);
+        
         $user = auth()->id();
 
-        /* $events=Session::join('workshop as w', 'sessions.workshop_id', '=', 'w.id')
-        ->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
-        ->select("sessions.id as id", "sessions.name as title","sessions.start as start","sessions.end as end","sessions.description_session as ds","reference")
-        ->where('uw.user_id',$user)
-        ->get()->toArray(); */
-
+       
         $events = DB::table('sessions')->distinct()
-        //->join('workshop as w', 'sessions.workshop_id', '=', 'w.id')
-        //->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
+        ->join('workshops as w', 'sessions.workshop_id', '=', 'w.id')
+        ->join('user_workshop as uw', 'w.id', '=', 'uw.workshop_id')
         //->join('categories as c', 'c.id', '=', 'w.categorie_id')
-        //->where('uw.user_id',$user)
+        ->where('uw.user_id',$user)
         //->where('w.categorie_id', 1)
-        ->select("sessions.id as id", "sessions.name as title","sessions.start as start","sessions.end as end","sessions.description_session as ds","reference")
+        ->select("sessions.id as id", "sessions.name as title","sessions.start as start","sessions.end as end","sessions.description_session as ds","reference","w.name_workshop as workshop_id")
         ->get()->toArray();
+
+
+      /*   $evento=Session::all();
+        $events=[];
+
+        foreach ($evento as $value){
+            $events[]=[
+                "id" => $value->id,
+                "title" => $value->name,
+                "start" => $value->start,
+                "end" => $value->end,
+                "extendedProps" =>[
+                    "ds" => $value->description_session,
+                    "reference" => $value->reference,
+                ]
+            ];
+        } */
 
         return response()->json($events);
 
         
     }
 
+    public function validatedate($w, $w_start, $w_end)
+    {
+        $workshop_date = DB::table('sessions')->distinct()
+        
+        ->join('workshops as w', 'sessions.workshop_id', '=', 'w.id')
+        ->select("w.id", "w.start", "w.end")
+        ->where('w.id',$w)
+        ->whereDate('w.start','<=',$w_start)
+        ->whereDate('w.end','>=',$w_end)
+        ->first();
+        //dd($workshop_date);
+        return $workshop_date == null ? true : false;
+    }
+
+
 
     public function create_session(Request $request)
     {
-        //
+        
         $eventos = $request->all();
-        $eventos["start"]=$eventos["start"]."".date("H:m:s", strtotime($eventos["hora_inicio"]));
-        //$eventos["end"]=$eventos["end"]."".date("H:m:s", strtotime($eventos["hora_final"]));
-        $eventos["end"]=$eventos["end"]."".date("H:m:s", strtotime($eventos["hora_fin"]));
 
-        Session::create($eventos);
+        if($this-> validatedate($eventos["workshop_id"], $eventos["start"], $eventos["end"])){
+
+            Flash::error('Las Fechas no coinciden');
+            return redirect(route('calendar'));
+           
+        }else{
+    
+            //dd($eventos["start"]);
+           $eventos["start"]=$eventos["start"]."".date("H:m:s", strtotime($eventos["hora_inicio"]));
+           //$eventos["end"]=$eventos["end"]."".date("H:m:s", strtotime($eventos["hora_final"]));
+           $eventos["end"]=$eventos["end"]."".date("H:m:s", strtotime($eventos["hora_fin"]));
+
+            Session::create($eventos);
+        }
 
         return redirect(route('calendar'));
 
