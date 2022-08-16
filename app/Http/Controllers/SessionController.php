@@ -33,9 +33,7 @@ class SessionController extends AppBaseController
      */
     public function validatedate($w, $w_start, $w_end)
     {
-        $workshop_date = DB::table('sessions')->distinct()
-        
-        ->join('workshops as w', 'sessions.workshop_id', '=', 'w.id')
+        $workshop_date = DB::table('workshops as w')
         ->select("w.id", "w.start", "w.end")
         ->where('w.id',$w)
         ->whereDate('w.start','<=',$w_start)
