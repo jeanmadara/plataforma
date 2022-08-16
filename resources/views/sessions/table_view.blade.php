@@ -38,7 +38,7 @@
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('sessions.edit', [$session->id]) }}"
+                        <a href="{{ route('sessionsedit', [$session->id, $session->workshop_id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>

@@ -162,7 +162,7 @@ class SessionController extends AppBaseController
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit($id,$workshop_id)
     {
         $session = $this->sessionRepository->find($id);
 
@@ -173,6 +173,19 @@ class SessionController extends AppBaseController
         }
 
         return view('sessions.edit')->with('session', $session);
+    }
+
+    public function sessionsedit($id, $workshop_id)
+    {
+        $session = $this->sessionRepository->find($id);
+
+        if (empty($session)) {
+            Flash::error('Session not found');
+
+            return redirect(route('sessions.index'));
+        }
+
+        return view('sessions.edit',compact('workshop_id'))->with('session', $session);
     }
 
     /**
