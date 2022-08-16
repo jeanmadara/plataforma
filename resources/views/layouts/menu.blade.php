@@ -101,13 +101,13 @@
     </a>
     </li> 
     @endcan 
-    @can('docente.index')<li class="nav-item">
+    @can('teacher.index')<li class="nav-item">
     <a href="{{ route('sessions.index') }}"
        class="nav-link {{ Request::is('sessions*') ? 'active' : '' }}">
         <p>Sesiones</p>
     </a>
     </li>@endcan
-    @can('docente.index')<li class="nav-item">
+    @can('teacher.index')<li class="nav-item">
     <a href="{{ route('attendances.index') }}"
        class="nav-link {{ Request::is('attendances*') ? 'active' : '' }}">
         <p>Control de Asistencia</p>
