@@ -63,7 +63,7 @@
 @endcan
 
 <!-- Cursos -->
-@can('workshops.index')
+@can('student.teacher')
 <li class="nav-item">
 <a data-toggle="collapse" href="#collapse3" class="nav-link"><p><h5>Cursos</h5></p></a>
 </li>    
@@ -101,20 +101,18 @@
     </a>
     </li> 
     @endcan 
-    @can('activities.create')<li class="nav-item">
+    @can('docente.index')<li class="nav-item">
     <a href="{{ route('sessions.index') }}"
        class="nav-link {{ Request::is('sessions*') ? 'active' : '' }}">
         <p>Sesiones</p>
     </a>
     </li>@endcan
-    @can('activities.create')
-<li class="nav-item">
+    @can('docente.index')<li class="nav-item">
     <a href="{{ route('attendances.index') }}"
        class="nav-link {{ Request::is('attendances*') ? 'active' : '' }}">
         <p>Control de Asistencia</p>
     </a>
-</li>
-@endcan
+</li>@endcan
 </div>
 @endcan 
 
@@ -157,12 +155,12 @@
 </li>
 @endcan
 
-<li class="nav-item">
+@can('student.teacher')<li class="nav-item">
     <a href="{{ route('calendar') }}"
        class="nav-link {{ Request::is('calendar*') ? 'active' : '' }}">
         <p>Agenda</p>
     </a>
-</li>
+</li>@endcan
 
 <li class="nav-item">
     <a href="{{ route('profiles.index') }}"
