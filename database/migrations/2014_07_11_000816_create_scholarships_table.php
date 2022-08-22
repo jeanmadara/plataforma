@@ -18,6 +18,7 @@ class CreateScholarshipsTable extends Migration
             $table->id('id');
             $table->string('name');
             $table->string('description');
+            $table->integer('percentage')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

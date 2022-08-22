@@ -4,6 +4,7 @@
         <tr>
             <th>Nombre</th>
         <th>Descripción</th>
+        <th>porcentaje</th>
             <th colspan="3">Acción</th>
         </tr>
         </thead>
@@ -12,6 +13,7 @@
             <tr>
                 <td>{{ $scholarship->name }}</td>
             <td>{{ $scholarship->description }}</td>
+            <td>{{ $scholarship->percentage }}%</td>
                 <td width="120">
                     {!! Form::open(['route' => ['scholarships.destroy', $scholarship->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

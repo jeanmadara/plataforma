@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 
 use App\Models\Profile;
+use App\Models\Scholarship;
 
 class UsuarioController extends Controller
 {
@@ -52,7 +53,8 @@ class UsuarioController extends Controller
     {
         //aqui trabajamos con name de las tablas de users
         $roles = Role::pluck('name','name')->all();
-        return view('usuarios.crear',compact('roles'));
+        $scholarship = Scholarship::pluck('name','id')->all();
+        return view('usuarios.crear',compact('roles','scholarship'));
     }
 
     /**
@@ -80,7 +82,8 @@ class UsuarioController extends Controller
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
-            'user_role' => $input['roles']]);
+            'user_role' => $input['roles'],
+            'scholarship_id' => $input['scholarship_id']]);
 
             $user->assignRole($request->input('roles'));
 
@@ -118,8 +121,9 @@ class UsuarioController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
+        $scholarship = Scholarship::pluck('name','id')->all();
     
-        return view('usuarios.editar',compact('user','roles','userRole'));
+        return view('usuarios.editar',compact('user','roles','userRole','scholarship'));
     }
     
 

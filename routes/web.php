@@ -28,6 +28,7 @@ Route::resource('categories', App\Http\Controllers\CategorieController::class);
 
 
 Route::resource('scholarships', App\Http\Controllers\ScholarshipController::class);
+Route::get('/comprobante/{id}', [App\Http\Controllers\ScholarshipController::class,'comprobante'])->name('comprobante');
 
 
 Route::resource('profiles', App\Http\Controllers\ProfileController::class);

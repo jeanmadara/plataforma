@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+use App\Models\User;
+
 class ScholarshipController extends AppBaseController
 {
     /** @var ScholarshipRepository $scholarshipRepository*/
@@ -31,11 +33,45 @@ class ScholarshipController extends AppBaseController
      *
      * @return Response
      */
+
+    public function comprobante($id)
+    {
+        //$scholarship = $this->scholarshipRepository->find($id);
+
+        $usuarios = User::join('scholarships as sc', 'sc.id', '=', 'scholarship_id')
+        ->join('profiles as p', 'p.user_id', '=', 'users.id')
+        ->join('user_workshop as uw', 'users.id', '=', 'uw.user_id')
+        ->join('workshops as w', 'w.id', '=', 'uw.workshop_id')
+        ->select( 'users.*', 'sc.name as name_scholarship', 'percentage', 'name_workshop', 'price','full_name','dni')
+        ->get();
+
+        $usuario = $usuarios->find($id);
+
+        //dd($usuario);
+
+      /*   if (empty($scholarship)) {
+            Flash::error('Scholarship not found');
+
+            return redirect(route('scholarships.index'));
+        } */
+
+        return view('scholarships.show_comp')->with('usuario', $usuario);
+    }
+    
     public function index(Request $request)
     {
         $scholarships = $this->scholarshipRepository->all();
 
-        return view('scholarships.index')
+        $usuarios = User::where('scholarship_id', '!=', 1)
+        ->join('scholarships as sc', 'sc.id', '=', 'scholarship_id')
+        ->join('user_workshop as uw', 'users.id', '=', 'uw.user_id')
+        ->join('workshops as w', 'w.id', '=', 'uw.workshop_id')
+        ->select( 'users.*', 'sc.name as name_scholarship', 'percentage', 'name_workshop')
+        ->paginate(5);
+       
+        //dd($usuarios);
+
+        return view('scholarships.index',compact('usuarios'))
             ->with('scholarships', $scholarships);
     }
 

@@ -9,3 +9,9 @@
     {!! Form::label('description', 'Descripción:') !!}
     {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
 </div>
+
+<!-- Phone Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('percentage', 'Porcentaje de Beca:') !!}
+    {!! Form::number('percentage', null, ['class' => 'form-control']) !!}
+</div>

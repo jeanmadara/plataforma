@@ -29,7 +29,8 @@ class Scholarship extends Model
 
     public $fillable = [
         'name',
-        'description'
+        'description',
+        'percentage'
     ];
 
     /**
@@ -39,7 +40,8 @@ class Scholarship extends Model
      */
     protected $casts = [
         'name' => 'string',
-        'description' => 'string'
+        'description' => 'string',
+        'percentage' => 'string'
     ];
 
     /**
@@ -48,7 +50,8 @@ class Scholarship extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required'
+        'name' => 'required',
+        'percentage' => 'numeric',
     ];
 
     
