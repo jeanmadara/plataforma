@@ -90,7 +90,7 @@ class user_workshopController extends AppBaseController
 
         Flash::success('User Workshop saved successfully.');
 
-        return redirect(route('activities.index'));
+        return redirect(route('userWorkshops.index'));
     }
 
     /**

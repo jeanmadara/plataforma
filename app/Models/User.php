@@ -23,7 +23,10 @@ class User extends Authenticatable
         'email',
         'password',
         'user_role',
-        'scholarship_id'
+        'scholarship_id',
+        'scholarship_state',
+        'scholarship_justification',
+        'scholarship_apply'
     ];
 
     /**

@@ -20,6 +20,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('user_role')->default('estudiante');
+            $table->string('scholarship_state')->nullable();
+            $table->string('scholarship_justification')->nullable();
+            $table->integer('scholarship_apply')->nullable();
             $table->unsignedBigInteger('scholarship_id')->unsigned()->default(1);
             $table->rememberToken();
             $table->timestamps();

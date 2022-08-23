@@ -30,9 +30,13 @@
     <p>${{ $usuario->price }}</p>
 </div>
 <!-- name_scholarship Field -->
-<div class="col-sm-12">
+<div class="col-sm-6">
     {!! Form::label('name_scholarship', 'Beca otorgada:') !!}
     <p>{{ $usuario->name_scholarship }}</p>
+</div>
+<div class="col-sm-6">
+    {!! Form::label('percentage', 'porcentaje:') !!}
+    <p>{{ $usuario->percentage }}%</p>
 </div>
 <!-- Description Field -->
 <div class="col-sm-12">

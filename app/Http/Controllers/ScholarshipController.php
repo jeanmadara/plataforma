@@ -10,7 +10,10 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+use App\Models\Scholarship;
+
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class ScholarshipController extends AppBaseController
 {
@@ -33,6 +36,34 @@ class ScholarshipController extends AppBaseController
      *
      * @return Response
      */
+    public function applyscholarship()
+    {
+        //$scholarship = Scholarship::pluck('name','id')->all();
+        //$scholarship = Scholarship::select(DB::raw("CONCAT(name, '-', percentage) AS name_sch"), "id")->pluck('name_sch', 'id')->all();
+        $scholarship = DB::table('scholarships')
+        ->select('id', DB::raw("CONCAT(name,' || equivale: ',percentage,'%') AS name"))
+        ->get()->pluck('name', 'id');
+        //dd($scholarship);
+        return view('scholarships.create_apply',compact('scholarship'));
+    }
+
+    public function applysave(Request $request)
+    {
+       
+        $input = $request->all();
+       
+        $id = auth()->id();
+
+        $input['scholarship_state'] = 'pendiente';
+ //dd($input);
+    
+        $user = User::find($id);
+        $user->update($input);
+        Flash::success('Su Solicitud fue enviada correctamente.');
+        
+        return redirect(route('home'));
+    }
+
 
     public function comprobante($id)
     {
@@ -49,29 +80,65 @@ class ScholarshipController extends AppBaseController
 
         //dd($usuario);
 
-      /*   if (empty($scholarship)) {
-            Flash::error('Scholarship not found');
-
-            return redirect(route('scholarships.index'));
-        } */
-
         return view('scholarships.show_comp')->with('usuario', $usuario);
     }
     
+    public function agree($scholarship_id,$user_id)
+    {
+              
+        $id = $user_id;
+
+        $input['scholarship_id'] = $scholarship_id;
+        $input['scholarship_state'] = 'aprobada';
+ //dd($input);
+    
+        $user = User::find($id);
+        //dd($user);
+        $user->update($input);
+        Flash::success('Solicitud aceptada correctamente.');
+        
+        return redirect(route('scholarships.index'));
+    }
+
+    public function deny($user_id)
+    {
+              
+        $id = $user_id;
+
+        $input['scholarship_id'] = 1;
+        $input['scholarship_state'] = 'negada';
+ //dd($input);
+    
+        $user = User::find($id);
+        //dd($user);
+        $user->update($input);
+        Flash::error('Solicitud fue negada.');
+        
+        return redirect(route('scholarships.index'));
+    }
+
     public function index(Request $request)
     {
         $scholarships = $this->scholarshipRepository->all();
 
-        $usuarios = User::where('scholarship_id', '!=', 1)
+        $pending = User::where('scholarship_state', '=', 'pendiente')->distinct()
+        ->join('scholarships as sc', 'sc.id', '=', 'scholarship_apply')
+        //->join('user_workshop as uw', 'users.id', '=', 'uw.user_id')
+        //->join('workshops as w', 'w.id', '=', 'uw.workshop_id')
+        ->select( 'users.*', 'sc.name as name_scholarship', 'percentage')
+        ->paginate(5);
+        //dd($usuarios);
+
+        $usuarios = User::where('scholarship_id', '!=', 1)->distinct()
         ->join('scholarships as sc', 'sc.id', '=', 'scholarship_id')
         ->join('user_workshop as uw', 'users.id', '=', 'uw.user_id')
         ->join('workshops as w', 'w.id', '=', 'uw.workshop_id')
         ->select( 'users.*', 'sc.name as name_scholarship', 'percentage', 'name_workshop')
         ->paginate(5);
        
-        //dd($usuarios);
+      
 
-        return view('scholarships.index',compact('usuarios'))
+        return view('scholarships.index',compact('usuarios','pending'))
             ->with('scholarships', $scholarships);
     }
 

@@ -9,6 +9,8 @@
         <th>Precio</th>
         @can('student.index')
         <th>Docente</th>@endcan
+        @can('student.index')
+        <th>comprobate</th>@endcan
         @can('workshops.create')<th colspan="3">Acciones</th>@endcan
         </tr>
         </thead>
@@ -22,6 +24,9 @@
             <td>${{ $workshop->price }}</td>
             @can('student.index')
             <td>{{ $workshop->teacher}}</td>@endcan
+            @can('student.index')<td>                                  
+            <a class="btn btn-info" href="{{ route('comprobante', [auth()->id()]) }}">comprobate</a>
+            </td>@endcan
             @can('workshops.create')<td width="120">
                     {!! Form::open(['route' => ['workshops.destroy', $workshop->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

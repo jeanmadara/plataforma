@@ -28,6 +28,12 @@ Route::resource('categories', App\Http\Controllers\CategorieController::class);
 
 
 Route::resource('scholarships', App\Http\Controllers\ScholarshipController::class);
+Route::get('/applyscholarship', [App\Http\Controllers\ScholarshipController::class,'applyscholarship'])->name('applyscholarship');
+Route::post('/applysave', [App\Http\Controllers\ScholarshipController::class,'applysave'])->name('applysave');
+
+Route::get('/agree/{scholarship_id}/{user_id}', [App\Http\Controllers\ScholarshipController::class,'agree'])->name('agree');
+Route::get('/deny/{user_id}', [App\Http\Controllers\ScholarshipController::class,'deny'])->name('deny');
+
 Route::get('/comprobante/{id}', [App\Http\Controllers\ScholarshipController::class,'comprobante'])->name('comprobante');
 
 

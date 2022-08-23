@@ -22,13 +22,13 @@
     </a>
     </li>
     @endcan
-    <li class="nav-item">
+   <!--  <li class="nav-item">
     <a href="{{ route('userWorkshops.index') }}"
        class="nav-link {{ Request::is('userWorkshops*') ? 'active' : '' }}">
         <p>Asignar Curso</p>
     </a>
-    </li> 
-</div>
+    </li> -->
+</div> 
  @endcan
 
 <!-- Roles y Permisos
@@ -169,3 +169,11 @@
     </a>
 </li>
 
+@can('student.index')
+    <li class="nav-item">
+    <a href="{{ route('applyscholarship') }}"
+       class="nav-link {{ Request::is('applyscholarship*') ? 'active' : '' }}">
+        <p>Solicitar Beca</p>
+    </a>
+    </li> 
+    @endcan

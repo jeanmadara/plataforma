@@ -53,8 +53,8 @@ class UsuarioController extends Controller
     {
         //aqui trabajamos con name de las tablas de users
         $roles = Role::pluck('name','name')->all();
-        $scholarship = Scholarship::pluck('name','id')->all();
-        return view('usuarios.crear',compact('roles','scholarship'));
+        //$scholarship = Scholarship::pluck('name','id')->all();
+        return view('usuarios.crear',compact('roles'));
     }
 
     /**
@@ -73,7 +73,7 @@ class UsuarioController extends Controller
         ]);
     
         $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
+        //$input['password'] = Hash::make($input['password']);
     
         //$user = User::create($input);
        //dd($input);
@@ -83,7 +83,8 @@ class UsuarioController extends Controller
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
             'user_role' => $input['roles'],
-            'scholarship_id' => $input['scholarship_id']]);
+            //'scholarship_id' => $input['scholarship_id']
+        ]);
 
             $user->assignRole($request->input('roles'));
 
@@ -121,9 +122,9 @@ class UsuarioController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-        $scholarship = Scholarship::pluck('name','id')->all();
+        //$scholarship = Scholarship::pluck('name','id')->all();
     
-        return view('usuarios.editar',compact('user','roles','userRole','scholarship'));
+        return view('usuarios.editar',compact('user','roles','userRole'));
     }
     
 
