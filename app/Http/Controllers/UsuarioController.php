@@ -38,7 +38,7 @@ class UsuarioController extends Controller
         return view('usuarios.index',compact('usuarios')); */
 
         //Con paginación
-        $usuarios = User::paginate(5);
+        $usuarios = User::orderBy('created_at', 'desc')->paginate(5);
         return view('usuarios.index',compact('usuarios'));
 
         //al usar esta paginacion, recordar poner en el el index.blade.php este codigo  {!! $usuarios->links() !!}

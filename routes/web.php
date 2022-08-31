@@ -56,6 +56,8 @@ Route::resource('userWorkshops', App\Http\Controllers\user_workshopController::c
 
 Route::get('reportes', [App\Http\Controllers\WorkshopController::class,'lista'])->name('reportes');
 
+Route::get('reportedocente', [App\Http\Controllers\WorkshopController::class,'listadocente'])->name('reportedocente');
+
 
 Route::resource('sessions', App\Http\Controllers\SessionController::class);
 Route::get('/sessionsedit/{id}/{workshop_id}', [App\Http\Controllers\SessionController::class,'sessionsedit'])->name('sessionsedit');

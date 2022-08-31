@@ -65,6 +65,38 @@ class WorkshopController extends AppBaseController
         return view('user_workshops.lista',compact('categorie'))
         ->with('workshops_user', $workshops_user);
     } 
+    public function listadocente(Request $request)
+    {
+        $user = auth()->id();
+        
+        $docente = Profile::where('user_id',$user)->pluck('full_name');
+
+        $categorie = Categorie::pluck('name_categorie','id');
+        
+
+        $name_categorie  = $request->get('name_categorie');
+        $teacher = $request->get('teacher');
+        $name_workshop   = $request->get('name_workshop'); 
+
+            $workshops_user = Workshop::orderBy('name', 'DESC')
+            //->distinct()
+            ->join('categories as c', 'c.id', '=', 'categorie_id')
+            ->join('user_workshop as uw', 'workshops.id', '=', 'uw.workshop_id')
+            ->join('users as us', 'us.id', '=', 'uw.user_id')
+            //->join('profiles', 'profiles.user_id', '=', 'us.id')
+            ->tipo_actividad($name_categorie)
+            ->teacher($teacher)
+            ->name($name_workshop)
+            //->where('us.user_role', 'estudiante')
+            ->where('teacher', $docente)
+            ->paginate(5);
+            //->get();    
+
+            //dd($docente);
+
+        return view('user_workshops.lista_docente',compact('categorie'))
+        ->with('workshops_user', $workshops_user);
+    } 
     public function index(Request $request)
     {
         $workshops = $this->workshopRepository->all();

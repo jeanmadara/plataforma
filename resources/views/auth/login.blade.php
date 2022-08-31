@@ -42,7 +42,7 @@
     <!-- /.login-box-body -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">iniciar sesión</p>
 
             <form method="post" action="{{ url('/login') }}">
                 @csrf
@@ -92,11 +92,9 @@
                 </div>
             </form>
 
-            <p class="mb-1">
-                <a href="{{ route('password.request') }}">I forgot my password</a>
-            </p>
+            
             <p class="mb-0">
-                <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
+                <a href="{{ route('register') }}" class="text-center">No estoy registrado</a>
             </p>
         </div>
         <!-- /.login-card-body -->

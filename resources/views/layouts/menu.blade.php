@@ -146,9 +146,18 @@
 </div>
 @endcan
 
-@can('activities.create')
+@can('admin.index')
 <li class="nav-item">
     <a href="{{ route('reportes') }}"
+       class="nav-link {{ Request::is('reportes*') ? 'active' : '' }}">
+        <p>reportes</p>
+    </a>
+</li>
+@endcan
+
+@can('teacher.index')
+<li class="nav-item">
+    <a href="{{ route('reportedocente') }}"
        class="nav-link {{ Request::is('reportes*') ? 'active' : '' }}">
         <p>reportes</p>
     </a>

@@ -5,6 +5,7 @@
             <th>Nombre Completo</th>
         <th>Cédula o Pasaporte</th>
         <th>Teléfono</th>
+        <th>E-mail</th>
         <th>Descripción</th>
        
             <th colspan="3">Acción</th>
@@ -17,6 +18,7 @@
                 <td>{{ $profile->full_name }}</td>
             <td>{{ $profile->dni }}</td>
             <td>{{ $profile->phone }}</td>
+            <td>{{ $profile->users->email }}</td>
             <td>{{ $profile->description }}</td>
             
                 <td width="120">
