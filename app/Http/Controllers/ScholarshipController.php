@@ -41,6 +41,7 @@ class ScholarshipController extends AppBaseController
         //$scholarship = Scholarship::pluck('name','id')->all();
         //$scholarship = Scholarship::select(DB::raw("CONCAT(name, '-', percentage) AS name_sch"), "id")->pluck('name_sch', 'id')->all();
         $scholarship = DB::table('scholarships')
+        ->where('deleted_at', Null)
         ->select('id', DB::raw("CONCAT(name,' || equivale: ',percentage,'%') AS name"))
         ->get()->pluck('name', 'id');
         //dd($scholarship);
