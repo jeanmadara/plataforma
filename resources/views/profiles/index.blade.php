@@ -8,7 +8,12 @@
                     <h1>Perfil de Usuario</h1>
                 </div>
                 <div class="col-sm-6">
-                    
+                @can('admin.index')
+                     <a class="btn btn-primary float-right"
+                       href="{{ route('profiles.create') }}">
+                       Actualizar Información
+                    </a>
+                    @endcan
                 </div>
             </div>
         </div>
